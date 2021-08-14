@@ -33,7 +33,7 @@ class Brand(models.Model):
 class PremiseMain(models.Model):
     id = models.BigAutoField(primary_key=True)
     number = models.CharField(max_length=7, unique=True)
-    premise_type = models.CharField(max_length=50)
+    # premise_type = models.CharField(max_length=50)
 
     floor = models.IntegerField(validators=[MinValueValidator(-20), MaxValueValidator(99)])
     measured_area = models.DecimalField(max_digits=8, decimal_places=2)

@@ -20,7 +20,7 @@ class PremiseMainSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'number',
-            'premise_type',
+            # 'premise_type',
 
             'floor',
             'measured_area',
