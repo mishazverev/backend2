@@ -1,1 +1,1 @@
-web: gunicorn renti.wsgi
+web: gunicorn backend2.wsgi
