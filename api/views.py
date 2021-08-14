@@ -12,11 +12,6 @@ class BrandViewSet(viewsets.ModelViewSet):
     serializer_class = BrandSerializer
 
 
-class PremiseTypeViewSet(viewsets.ModelViewSet):
-    queryset = PremiseType.objects.all()
-    serializer_class = PremiseTypeSerializer
-
-
 class PremiseMainViewSet(viewsets.ModelViewSet):
     queryset = PremiseMain.objects.all()
     serializer_class = PremiseMainSerializer

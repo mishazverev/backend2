@@ -30,18 +30,6 @@ class Brand(models.Model):
         return self.brand_name
 
 
-class PremiseType(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    type_name = models.CharField(max_length=50, unique=True)
-    type_description = models.CharField(null=True, max_length=200)
-
-    class Meta:
-        ordering = ['type_name']
-
-    def __str__(self):
-        return self.type_name
-
-
 class PremiseMain(models.Model):
     id = models.BigAutoField(primary_key=True)
     number = models.CharField(max_length=7, unique=True)

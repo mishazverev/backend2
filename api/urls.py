@@ -6,7 +6,6 @@ from .views import *
 router = routers.DefaultRouter()
 router.register('categorytags', CategoryTagViewSet)
 router.register('brands', BrandViewSet)
-router.register('premisetypes', PremiseTypeViewSet)
 router.register('premises', PremiseMainViewSet)
 router.register('tenants', TenantContractorViewSet)
 router.register('rentcontracts', RentContractViewSet)

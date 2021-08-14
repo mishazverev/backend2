@@ -14,12 +14,6 @@ class BrandSerializer(serializers.ModelSerializer):
         fields = ('id', 'brand_name', 'brand_description', 'brand_category_tag')
 
 
-class PremiseTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PremiseType
-        fields = ('id', 'type_name', 'type_description')
-
-
 class PremiseMainSerializer(serializers.ModelSerializer):
     class Meta:
         model = PremiseMain
