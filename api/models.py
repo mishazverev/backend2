@@ -57,9 +57,9 @@ class PremiseMain(models.Model):
 
 class TenantContractor(models.Model):
     id = models.BigAutoField(primary_key=True)
-    company_name = models.CharField(max_length=100, null=True)
+    company_name = models.CharField(max_length=100)
     needed_premise_type = models.CharField(max_length=30)
-    brands = models.ManyToManyField(Brand)
+    brands = models.ManyToManyField(Brand, null=True)
 
     contact_person_name = models.CharField(max_length=100, null=True)
     contact_person_position = models.CharField(max_length=100, null=True)
@@ -69,9 +69,9 @@ class TenantContractor(models.Model):
     contact_person_mobile2 = models.PositiveBigIntegerField(null=True)
     description = models.TextField(blank=True, null=True, max_length=500)
 
-    retail_premise_type = models.CharField(max_length=30)
-    needed_min_area = models.DecimalField(max_digits=8, decimal_places=2)
-    needed_max_area = models.DecimalField(max_digits=8, decimal_places=2)
+    retail_premise_type = models.CharField(max_length=30, null=True)
+    needed_min_area = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+    needed_max_area = models.DecimalField(max_digits=8, decimal_places=2, null=True)
     needed_ceiling_height = models.DecimalField(null=True, max_digits=4, decimal_places=2)
     needed_facade_length = models.DecimalField(null=True, max_digits=4, decimal_places=2)
     needed_fitout_condition = models.BooleanField(default=False)
@@ -80,7 +80,7 @@ class TenantContractor(models.Model):
     needed_water_supply = models.BooleanField(default=False)
     needed_additional_requirements = models.TextField(blank=True, null=True, max_length=500)
 
-    legal_name = models.CharField(max_length=100)
+    legal_name = models.CharField(max_length=100, null=True)
     tax_id = models.BigIntegerField(unique=True, default=0)
     signing_person_name = models.CharField(max_length=200, null=True)
     signing_person_position = models.CharField(max_length=200, null=True)
@@ -88,9 +88,9 @@ class TenantContractor(models.Model):
     postal_address = models.CharField(max_length=200, null=True)
 
     kpp = models.BigIntegerField(null=True)
-    bik = models.CharField(max_length=9)
-    bank_name = models.CharField(max_length=100)
-    current_account = models.CharField(max_length=40)
+    bik = models.CharField(max_length=9, null=True)
+    bank_name = models.CharField(max_length=100, null=True)
+    current_account = models.CharField(max_length=40, null=True)
     correspondent_account = models.CharField(max_length=40, null=True)
     ogrn = models.CharField(max_length=15, null=True)
     okpo = models.CharField(max_length=10, null=True)
