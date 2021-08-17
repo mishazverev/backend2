@@ -59,7 +59,7 @@ class TenantContractor(models.Model):
     id = models.BigAutoField(primary_key=True)
     company_name = models.CharField(max_length=100)
     needed_premise_type = models.CharField(max_length=30)
-    brands = models.ManyToManyField(Brand, null=True)
+    brands = models.CharField(max_length=100, null=True)
 
     contact_person_name = models.CharField(max_length=100, null=True)
     contact_person_position = models.CharField(max_length=100, null=True)
