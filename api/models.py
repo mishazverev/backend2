@@ -64,9 +64,9 @@ class TenantContractor(models.Model):
     contact_person_name = models.CharField(max_length=100, null=True, blank=True)
     contact_person_position = models.CharField(max_length=100, null=True, blank=True)
     contact_person_email = models.EmailField(null=True, blank=True)
-    contact_person_phone = models.PositiveBigIntegerField(null=True, blank=True)
-    contact_person_mobile1 = models.PositiveBigIntegerField(null=True, blank=True)
-    contact_person_mobile2 = models.PositiveBigIntegerField(null=True, blank=True)
+    contact_person_phone = models.CharField(max_length=100, null=True, blank=True)
+    contact_person_mobile1 = models.CharField(max_length=100, null=True, blank=True)
+    contact_person_mobile2 = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(blank=True, null=True, max_length=500)
 
     retail_premise_type = models.CharField(max_length=30, null=True, blank=True)
@@ -87,7 +87,7 @@ class TenantContractor(models.Model):
     legal_address = models.CharField(max_length=200, null=True, blank=True)
     postal_address = models.CharField(max_length=200, null=True, blank=True)
 
-    kpp = models.BigIntegerField(null=True, blank=True)
+    kpp = models.CharField(max_length=9, null=True, blank=True)
     bik = models.CharField(max_length=9, null=True, blank=True)
     bank_name = models.CharField(max_length=100, null=True, blank=True)
     current_account = models.CharField(max_length=40, null=True, blank=True)
