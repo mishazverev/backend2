@@ -23,7 +23,7 @@ class TenantContractorViewSet(viewsets.ModelViewSet):
 
 
 class TenantContractorContactsViewSet(viewsets.ModelViewSet):
-    queryset = TenantContractor.objects.all()
+    queryset = TenantContractorContacts.objects.all()
     serializer_class = TenantContractorSerializer
 
 
