@@ -103,7 +103,7 @@ class TenantContractor(models.Model):
 
 class TenantContractorContacts(models.Model):
     id = models.BigAutoField(primary_key=True)
-    tenant_contractor_id = models.ForeignKey(TenantContractor, on_delete=DO_NOTHING, null=True, default='')
+    tenant_contractor_id = models.ForeignKey(TenantContractor, on_delete=models.CASCADE, null=True, default='')
     contact_person_name = models.CharField(max_length=100, null=True, blank=True)
     contact_person_position = models.CharField(max_length=100, null=True, blank=True)
     contact_person_email = models.EmailField(null=True, blank=True)

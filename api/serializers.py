@@ -87,7 +87,8 @@ class TenantContractorSerializer(serializers.ModelSerializer):
                   'user_updated',
                   )
 
-class TenantContractorContactsSerializer (serializers.Serializer):
+
+class TenantContractorContactsSerializer(serializers.ModelSerializer):
     class Meta:
         model = TenantContractorContacts
         fields = (
@@ -99,7 +100,6 @@ class TenantContractorContactsSerializer (serializers.Serializer):
             'contact_person_mobile1',
             'contact_person_mobile2',
         )
-
 
 
 class RentContractSerializer(serializers.ModelSerializer):
