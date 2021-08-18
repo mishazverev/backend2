@@ -73,7 +73,7 @@ class TenantContractor(models.Model):
     needed_min_area = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
     needed_max_area = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
     needed_ceiling_height = models.DecimalField(null=True, max_digits=4, decimal_places=2, blank=True)
-    needed_facade_length = models.DecimalField(null=True, max_digits=4, decimal_places=2,blank=True)
+    needed_facade_length = models.DecimalField(null=True, max_digits=4, decimal_places=2, blank=True)
     needed_fitout_condition = models.BooleanField(default=False)
     needed_electric_capacity = models.DecimalField(null=True, max_digits=6, decimal_places=2, blank=True)
     needed_cooling_capacity = models.DecimalField(null=True, max_digits=6, decimal_places=2, blank=True)
@@ -99,6 +99,17 @@ class TenantContractor(models.Model):
 
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+
+class TenantContractorContacts(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    tenant_contractor_id = models.ForeignKey(TenantContractor, on_delete=DO_NOTHING, null=True, default='')
+    contact_person_name = models.CharField(max_length=100, null=True, blank=True)
+    contact_person_position = models.CharField(max_length=100, null=True, blank=True)
+    contact_person_email = models.EmailField(null=True, blank=True)
+    contact_person_phone = models.CharField(max_length=100, null=True, blank=True)
+    contact_person_mobile1 = models.CharField(max_length=100, null=True, blank=True)
+    contact_person_mobile2 = models.CharField(max_length=100, null=True, blank=True)
 
 
 class RentContract(models.Model):

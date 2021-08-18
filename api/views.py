@@ -22,6 +22,11 @@ class TenantContractorViewSet(viewsets.ModelViewSet):
     serializer_class = TenantContractorSerializer
 
 
+class TenantContractorContactsViewSet(viewsets.ModelViewSet):
+    queryset = TenantContractor.objects.all()
+    serializer_class = TenantContractorSerializer
+
+
 class RentContractViewSet(viewsets.ModelViewSet):
     queryset = RentContract.objects.all()
     serializer_class = RentContractSerializer

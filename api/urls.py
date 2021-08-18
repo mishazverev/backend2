@@ -9,6 +9,7 @@ router.register('brands', BrandViewSet)
 router.register('premises', PremiseMainViewSet)
 router.register('tenants', TenantContractorViewSet)
 router.register('rentcontracts', RentContractViewSet)
+router.register('tenantcontacts',TenantContractorContactsViewSet)
 
 
 urlpatterns = [
