@@ -18,10 +18,10 @@ class PremiseMainViewSet(viewsets.ModelViewSet):
     queryset = PremiseMain.objects.all()
     serializer_class = PremiseMainSerializer
 
-    def retrieve(self):
-        queryset = PremiseMain.objects.last()
-        serializer = PremiseMainSerializer(queryset)
-        return Response(serializer.data)
+    # def retrieve(self):
+    #     queryset = PremiseMain.objects.last()
+    #     serializer = PremiseMainSerializer(queryset)
+    #     return Response(serializer.data)
 
 
 class TenantContractorViewSet(viewsets.ModelViewSet):
