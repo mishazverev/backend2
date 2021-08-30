@@ -8,7 +8,6 @@ router.register('categorytags', CategoryTagViewSet)
 router.register('brands', BrandViewSet)
 router.register('premises', PremiseMainViewSet)
 router.register('tenants', TenantContractorViewSet)
-# router.register('tenantlast', TenantContractorViewSet.retrieve)
 router.register('rentcontracts', RentContractViewSet)
 router.register('tenantcontacts', TenantContractorContactsViewSet)
 

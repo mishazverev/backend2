@@ -1,6 +1,4 @@
 from rest_framework import viewsets
-from rest_framework.response import Response
-
 from .serializers import *
 
 
@@ -17,11 +15,6 @@ class BrandViewSet(viewsets.ModelViewSet):
 class PremiseMainViewSet(viewsets.ModelViewSet):
     queryset = PremiseMain.objects.all()
     serializer_class = PremiseMainSerializer
-
-    # def retrieve(self):
-    #     queryset = PremiseMain.objects.last()
-    #     serializer = PremiseMainSerializer(queryset)
-    #     return Response(serializer.data)
 
 
 class TenantContractorViewSet(viewsets.ModelViewSet):
