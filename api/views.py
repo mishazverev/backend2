@@ -7,7 +7,7 @@ from .serializers import *
 
 @api_view(['GET'])
 def last_tenant_contractor(request):
-    queryset = TenantContractor.objects.last().id
+    queryset = TenantContractor.objects.last()
     serializer = TenantContractorSerializer(queryset)
     return Response(serializer.data)
 
