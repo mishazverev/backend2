@@ -3,3 +3,4 @@ gunicorn
 django-heroku
 django-cors-headers
 djangorestframework~=3.12.4
+django-filter~=2.4.0

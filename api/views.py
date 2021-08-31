@@ -1,6 +1,8 @@
-from rest_framework import viewsets
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets, filters
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
 
 from .serializers import *
 
@@ -35,6 +37,8 @@ class TenantContractorViewSet(viewsets.ModelViewSet):
 class TenantContractorContactsViewSet(viewsets.ModelViewSet):
     queryset = TenantContractorContacts.objects.all()
     serializer_class = TenantContractorContactsSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['tenant_contractor_id']
 
 
 class RentContractViewSet(viewsets.ModelViewSet):
