@@ -46,14 +46,7 @@ class TenantContractorSerializer(serializers.ModelSerializer):
                   'company_name',
                   'needed_premise_type',
                   'brands',
-
-                  # 'contact_person_name',
-                  # 'contact_person_position',
-                  # 'contact_person_email',
-                  # 'contact_person_phone',
-                  # 'contact_person_mobile1',
-                  # 'contact_person_mobile2',
-                  # 'description',
+                  'brands_id',
 
                   'retail_premise_type',
                   'needed_min_area',
