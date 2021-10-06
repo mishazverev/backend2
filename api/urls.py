@@ -16,5 +16,7 @@ router.register('tenantcontacts', TenantContractorContactsViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('lasttenant', views.last_tenant_contractor)
+    path('lasttenant', views.last_tenant_contractor),
+    path('lastbrand', views.last_brand)
+
 ]

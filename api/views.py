@@ -3,7 +3,6 @@ from rest_framework import viewsets, filters
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-
 from .serializers import *
 
 
@@ -11,6 +10,13 @@ from .serializers import *
 def last_tenant_contractor(request):
     queryset = TenantContractor.objects.last()
     serializer = TenantContractorSerializer(queryset)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def last_brand(request):
+    queryset = Brand.objects.last()
+    serializer = BrandSerializer(queryset)
     return Response(serializer.data)
 
 
