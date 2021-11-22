@@ -1,4 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.generics import ListAPIView
+from rest_framework_word_filter import FullWordSearchFilter
 from rest_framework import viewsets, filters
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -50,3 +52,12 @@ class TenantContractorContactsViewSet(viewsets.ModelViewSet):
 class RentContractViewSet(viewsets.ModelViewSet):
     queryset = RentContract.objects.all()
     serializer_class = RentContractSerializer
+
+
+class BrandSearchFilter(ListAPIView):
+    model = Brand
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer
+    filter_backends = (FullWordSearchFilter,)
+    word_fields = ('brand_name',)
+
