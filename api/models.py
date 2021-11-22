@@ -109,9 +109,10 @@ class RentContract(models.Model):
     id = models.BigAutoField(primary_key=True)
     premise_id = models.ManyToManyField(PremiseMain)
     tenant_contractor_id = models.ForeignKey(TenantContractor, on_delete=DO_NOTHING, null=True, default='')
+    brand = models.ForeignKey(Brand, on_delete=DO_NOTHING, null=True)
+
     rent_contract_number = models.CharField(max_length=50, null=True, unique=True)
     contracted_area = models.DecimalField(max_digits=8, decimal_places=2)
-    brand = models.ForeignKey(Brand, on_delete=DO_NOTHING, null=True)
     contract_signing_date = models.DateField(default=timezone.now, auto_now=False, auto_now_add=False, null=True)
     rent_start_date = models.DateField(default=timezone.now, auto_now=False, auto_now_add=False)
     stop_billing_date = models.DateField(default=timezone.now, auto_now=False, auto_now_add=False, null=True)
