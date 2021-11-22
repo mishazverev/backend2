@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'api',
     'corsheaders',
     'django_filters',
-    'rest_framework_word_filter',
 ]
 
 MIDDLEWARE = [
