@@ -58,7 +58,7 @@ class TenantContractorSerializer(serializers.ModelSerializer):
                   'needed_electric_capacity',
                   'needed_cooling_capacity',
                   'needed_water_supply',
-                  'needed_additional_requirements'
+                  'needed_additional_requirements',
 
                   'legal_name',
                   'tax_id',
