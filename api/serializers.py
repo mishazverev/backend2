@@ -51,6 +51,15 @@ class TenantContractorSerializer(serializers.ModelSerializer):
                   'brands_id',
                   'description',
 
+                  'needed_min_area',
+                  'needed_max_area',
+                  'needed_ceiling_height',
+                  'needed_fitout_condition',
+                  'needed_electric_capacity',
+                  'needed_cooling_capacity',
+                  'needed_water_supply',
+                  'needed_additional_requirements'
+
                   'legal_name',
                   'tax_id',
                   'signing_person_name',

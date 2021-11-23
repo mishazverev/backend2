@@ -73,6 +73,15 @@ class TenantContractor(models.Model):
     brands_id = models.ManyToManyField(Brand)
     description = models.TextField(blank=True, null=True, max_length=500)
 
+    needed_min_area = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    needed_max_area = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    needed_ceiling_height = models.DecimalField(null=True, max_digits=4, decimal_places=2, blank=True)
+    needed_fitout_condition = models.BooleanField(default=False)
+    needed_electric_capacity = models.DecimalField(null=True, max_digits=6, decimal_places=2, blank=True)
+    needed_cooling_capacity = models.DecimalField(null=True, max_digits=6, decimal_places=2, blank=True)
+    needed_water_supply = models.BooleanField(default=False)
+    needed_additional_requirements = models.TextField(blank=True, null=True, max_length=500)
+
     legal_name = models.CharField(max_length=100, null=True, blank=True)
     tax_id = models.BigIntegerField(unique=True, default=0, blank=True, null=True)
     signing_person_name = models.CharField(max_length=200, null=True, blank=True)
