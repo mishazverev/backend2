@@ -162,10 +162,11 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
+        NONINDEXABLE = 'NonIndexable'
 
     rent_fee_indexation_type = models.CharField(
         null=True,
-        max_length=10,
+        max_length=20,
         choices=rent_fee_indexation_types.choices,
         default=rent_fee_indexation_types.CPI, )
 
@@ -173,10 +174,11 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
+        NONINDEXABLE = 'NonIndexable'
 
     service_fee_indexation_type = models.CharField(
         null=True,
-        max_length=10,
+        max_length=20,
         choices=service_fee_indexation_types.choices,
         default=service_fee_indexation_types.FIXED, )
 
@@ -184,10 +186,11 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
+        NONINDEXABLE = 'NonIndexable'
 
     marketing_fee_indexation_type = models.CharField(
         null=True,
-        max_length=10,
+        max_length=20,
         choices=marketing_fee_indexation_types.choices,
         default=marketing_fee_indexation_types.FIXED, )
 
@@ -195,10 +198,11 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
+        NONINDEXABLE = 'NonIndexable'
 
     utilities_compensation_fixed_indexation_type = models.CharField(
         null=True,
-        max_length=10,
+        max_length=20,
         choices=utilities_compensation_fixed_indexation_types.choices,
         default=utilities_compensation_fixed_indexation_types.FIXED, )
 
@@ -206,10 +210,11 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
+        NONINDEXABLE = 'NonIndexable'
 
     CA_utilities_compensation_fixed_indexation_type = models.CharField(
         null=True,
-        max_length=10,
+        max_length=20,
         choices=CA_utilities_compensation_fixed_indexation_types.choices,
         default=CA_utilities_compensation_fixed_indexation_types.FIXED, )
 
