@@ -116,47 +116,17 @@ class TenantContractorContacts(models.Model):
 
 class RentContract(models.Model):
     id = models.BigAutoField(primary_key=True)
+    rent_contract_number = models.CharField(max_length=50, null=True, unique=True)
+
     premise_id = models.ManyToManyField(PremiseMain)
+    contracted_area = models.DecimalField(max_digits=8, decimal_places=2)
     tenant_contractor_id = models.ForeignKey(TenantContractor, on_delete=DO_NOTHING, null=True, default='')
     brand = models.ForeignKey(Brand, on_delete=DO_NOTHING, null=True)
 
-    rent_contract_number = models.CharField(max_length=50, null=True, unique=True)
-    contracted_area = models.DecimalField(max_digits=8, decimal_places=2)
-    contract_signing_date = models.DateField(default=timezone.now, auto_now=False, auto_now_add=False, null=True)
-    rent_start_date = models.DateField(default=timezone.now, auto_now=False, auto_now_add=False)
-    stop_billing_date = models.DateField(default=timezone.now, auto_now=False, auto_now_add=False, null=True)
-    premise_return_date = models.DateField(default=timezone.now, auto_now=False, auto_now_add=False, null=True)
-    duration_years = models.IntegerField(null=True)
-    duration_months = models.IntegerField(null=True)
-    duration_days = models.IntegerField(null=True)
     rent_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2)
     service_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
     marketing_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
     turnover_fee = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
-    CA_utilities_compensation_fee_fixed = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
-
-    class utilities_compensation_types(models.TextChoices):
-        BY_COUNTERS = 'By counters'
-        FIXED = 'Fixed'
-        NONE = 'None'
-
-    utilities_compensation_type = models.CharField(
-        null=True,
-        max_length=20,
-        choices=utilities_compensation_types.choices,
-        default=utilities_compensation_types.BY_COUNTERS, )
-
-    class CA_utilities_compensation_types(models.TextChoices):
-        FIXED = 'Fixed'
-        PROPORTIONAL_LEASED = 'Proportional to leased area'
-        PROPORTIONAL_GLA = 'Proportional to GLA'
-        NONE = 'None'
-
-    CA_utilities_compensation_type = models.CharField(
-        null=True,
-        max_length=50,
-        choices=CA_utilities_compensation_types.choices,
-        default=CA_utilities_compensation_types.PROPORTIONAL_LEASED, )
 
     class rent_fee_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
@@ -194,6 +164,53 @@ class RentContract(models.Model):
         choices=marketing_fee_indexation_types.choices,
         default=marketing_fee_indexation_types.FIXED, )
 
+    rent_fee_indexation_fixed = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
+    service_fee_indexation_fixed = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
+    marketing_fee_indexation_fixed = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
+
+    contract_signing_date = models.DateField(default=timezone.now, auto_now=False, auto_now_add=False, null=True)
+    act_of_transfer_date = models.DateField(null=True, default=timezone.now, auto_now=False, auto_now_add=False)
+    rent_start_date = models.DateField(default=timezone.now, auto_now=False, auto_now_add=False)
+
+    contract_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
+    premise_return_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
+    stop_billing_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
+
+    rent_fee_advance_payment_day = models.IntegerField(null=True, default=10)
+    service_fee_advance_payment_day = models.IntegerField(null=True, default=10)
+    marketing_fee_advance_payment_day = models.IntegerField(null=True, default=10)
+
+    # duration_years = models.IntegerField(null=True)
+    # duration_months = models.IntegerField(null=True)
+    # duration_days = models.IntegerField(null=True)
+
+    CA_utilities_compensation_fee_fixed = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+
+    class utilities_compensation_types(models.TextChoices):
+        BY_COUNTERS = 'By counters'
+        FIXED = 'Fixed'
+        NONE = 'None'
+
+    utilities_compensation_type = models.CharField(
+        null=True,
+        max_length=20,
+        choices=utilities_compensation_types.choices,
+        default=utilities_compensation_types.BY_COUNTERS, )
+
+    class CA_utilities_compensation_types(models.TextChoices):
+        FIXED = 'Fixed'
+        PROPORTIONAL_LEASED = 'Proportional to leased area'
+        PROPORTIONAL_GLA = 'Proportional to GLA'
+        NONE = 'None'
+
+    CA_utilities_compensation_type = models.CharField(
+        null=True,
+        max_length=50,
+        choices=CA_utilities_compensation_types.choices,
+        default=CA_utilities_compensation_types.PROPORTIONAL_LEASED, )
+
+
+
     class utilities_compensation_fixed_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
         CPI = 'CPI'
@@ -218,20 +235,14 @@ class RentContract(models.Model):
         choices=CA_utilities_compensation_fixed_indexation_types.choices,
         default=CA_utilities_compensation_fixed_indexation_types.FIXED, )
 
-    rent_fee_indexation_fixed = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
-    service_fee_indexation_fixed = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
-    marketing_fee_indexation_fixed = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
     utilities_compensation_fixed_indexation_fixed = models.DecimalField(null=True, max_digits=4, decimal_places=2,
                                                                         default=0)
     CA_utilities_compensation_fee_fixed_indexation_type_fixed = models.DecimalField(null=True, max_digits=4,
                                                                                     decimal_places=2,
                                                                                     default=0)
 
-    act_of_transfer_signed = models.BooleanField(default=False)
-    act_of_transfer_date = models.DateField(null=True, default=timezone.now, auto_now=False, auto_now_add=False)
-    rent_fee_advance_payment_day = models.IntegerField(null=True, default=10)
-    service_fee_advance_payment_day = models.IntegerField(null=True, default=10)
-    marketing_fee_advance_payment_day = models.IntegerField(null=True, default=10)
+    # act_of_transfer_signed = models.BooleanField(default=False)
+
     CA_utilities_compensation_fee_fixed_payment_day = models.IntegerField(null=True, default=10)
     utilities_compensation_fixed_payment_day = models.IntegerField(null=True, default=10)
 

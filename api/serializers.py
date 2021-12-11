@@ -101,23 +101,70 @@ class RentContractSerializer(serializers.ModelSerializer):
     class Meta:
         model = RentContract
         fields = (
-            'id', 'premise_id', 'tenant_contractor_id', 'rent_contract_number', 'contracted_area', 'brand',
-            'contract_signing_date', 'rent_start_date', 'stop_billing_date', 'premise_return_date',
-            'duration_years', 'duration_months', 'duration_days', 'rent_fee_per_sqm', 'service_fee_per_sqm',
-            'marketing_fee_per_sqm', 'turnover_fee', 'CA_utilities_compensation_fee_fixed',
-            'utilities_compensation_type', 'CA_utilities_compensation_type',
-            'rent_fee_indexation_type', 'service_fee_indexation_type', 'marketing_fee_indexation_type',
-            'utilities_compensation_fixed_indexation_type', 'CA_utilities_compensation_fixed_indexation_type',
-            'rent_fee_indexation_fixed', 'service_fee_indexation_fixed', 'marketing_fee_indexation_fixed',
+            'id',
+            'rent_contract_number',
+
+            'premise_id',
+            'contracted_area',
+            'tenant_contractor_id',
+            'brand',
+
+            'rent_fee_per_sqm',
+            'service_fee_per_sqm',
+            'marketing_fee_per_sqm',
+            'turnover_fee',
+
+            'rent_fee_indexation_type',
+            'service_fee_indexation_type',
+            'marketing_fee_indexation_type',
+
+            'rent_fee_indexation_fixed',
+            'service_fee_indexation_fixed',
+            'marketing_fee_indexation_fixed',
+
+            'contract_signing_date',
+            'contract_expiration_date',
+
+            'rent_start_date',
+            'stop_billing_date',
+
+            'act_of_transfer_date',
+            'premise_return_date',
+
+            'rent_fee_advance_payment_day',
+            'service_fee_advance_payment_day',
+            'marketing_fee_advance_payment_day',
+
+
+            # 'duration_years',
+            # 'duration_months',
+            # 'duration_days',
+
+
+            'CA_utilities_compensation_fee_fixed',
+            'utilities_compensation_type',
+            'CA_utilities_compensation_type',
+
+            'utilities_compensation_fixed_indexation_type',
+            'CA_utilities_compensation_fixed_indexation_type',
+
             'utilities_compensation_fixed_indexation_fixed',
             'CA_utilities_compensation_fee_fixed_indexation_type_fixed',
-            'act_of_transfer_signed', 'act_of_transfer_date', 'rent_fee_advance_payment_day',
-            'service_fee_advance_payment_day', 'marketing_fee_advance_payment_day',
+            # 'act_of_transfer_signed',
+
             'CA_utilities_compensation_fee_fixed_payment_day',
-            'utilities_compensation_fixed_payment_day', 'guarantee_deposit_type',
-            'guarantee_deposit_amount', 'guarantee_deposit_number_of_months',
-            'guarantee_deposit_provided', 'guarantee_bank_guarantee_expiration_date',
-            'advance_payment_required', 'advance_payment_paid', 'advance_payment_amount',
-            'insurance_required', 'insurance_provided', 'insurance_expiration_date',
-            'last_updated', 'user_updated'
+            'utilities_compensation_fixed_payment_day',
+            'guarantee_deposit_type',
+            'guarantee_deposit_amount',
+            'guarantee_deposit_number_of_months',
+            'guarantee_deposit_provided',
+            'guarantee_bank_guarantee_expiration_date',
+            'advance_payment_required',
+            'advance_payment_paid',
+            'advance_payment_amount',
+            'insurance_required',
+            'insurance_provided',
+            'insurance_expiration_date',
+            'last_updated',
+            'user_updated'
         )
