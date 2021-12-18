@@ -173,15 +173,21 @@ class RentContractSerializer(serializers.ModelSerializer):
 
             'guarantee_deposit_type',
             'guarantee_deposit_amount',
-            'guarantee_deposit_number_of_months',
             'guarantee_deposit_provided',
+            'guarantee_deposit_contract_providing_date',
             'guarantee_bank_guarantee_expiration_date',
+
             'advance_payment_required',
             'advance_payment_paid',
             'advance_payment_amount',
+            'advance_payment_contract_providing_date',
+
+
             'insurance_required',
+            'insurance_contract_providing_date',
             'insurance_provided',
             'insurance_expiration_date',
+
             'last_updated',
             'user_updated'
         )

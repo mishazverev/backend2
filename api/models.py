@@ -391,20 +391,42 @@ class RentContract(models.Model):
     )
 
     guarantee_deposit_amount = models.DecimalField(null=True, max_digits=20, decimal_places=2)
-    guarantee_deposit_number_of_months = models.PositiveBigIntegerField(null=True)
     guarantee_deposit_provided = models.BooleanField(default=False)
+    guarantee_deposit_contract_providing_date = models.DateField(null=True, default=timezone.now, auto_now=False,
+                                                                auto_now_add=False)
     guarantee_bank_guarantee_expiration_date = models.DateField(null=True, default=timezone.now, auto_now=False,
                                                                 auto_now_add=False)
 
     # --- Advance payment
 
-    advance_payment_required = models.BooleanField(null=True, default=None)
+    class advance_payment_required_options(models.TextChoices):
+        REQUIRED = 'Required'
+        NOT_REQUIRED = 'Not required'
+
+    advance_payment_required = models.CharField(
+        null=True,
+        max_length=25,
+        choices=advance_payment_required_options.choices,
+        default=advance_payment_required_options.REQUIRED,
+    )
+    advance_payment_contract_providing_date = models.DateField(null=True, default=timezone.now, auto_now=False,
+                                                                auto_now_add=False)
     advance_payment_paid = models.BooleanField(null=True, default=None)
     advance_payment_amount = models.DecimalField(null=True, max_digits=20, decimal_places=2)
 
     # --- Insurance
+    class insurance_required_options(models.TextChoices):
+        REQUIRED = 'Required'
+        NOT_REQUIRED = 'Not required'
 
-    insurance_required = models.BooleanField(null=True, default=None)
+    insurance_required = models.CharField(
+        null=True,
+        max_length=25,
+        choices=insurance_required_options.choices,
+        default=insurance_required_options.REQUIRED,
+    )
+    insurance_contract_providing_date = models.DateField(null=True, default=timezone.now, auto_now=False,
+                                                                auto_now_add=False)
     insurance_provided = models.BooleanField(null=True, default=None)
     insurance_expiration_date = models.DateField(null=True, default=timezone.now, auto_now=False, auto_now_add=False)
 
