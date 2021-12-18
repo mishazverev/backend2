@@ -367,7 +367,7 @@ class RentContract(models.Model):
                                                                                     decimal_places=2,
                                                                                     default=0)
 
-    CA_utilities_compensation_fee_fixed_payment_day = models.IntegerField(null=True, default=10)
+    CA_utilities_compensation_fee_payment_day = models.IntegerField(null=True, default=10)
 
     # --- Guarantee deposit
 
