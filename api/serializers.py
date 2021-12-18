@@ -103,6 +103,8 @@ class RentContractSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'rent_contract_number',
+            'contract_signing_date',
+            'contract_expiration_date',
 
             'premise_id',
             'contracted_area',
@@ -110,20 +112,24 @@ class RentContractSerializer(serializers.ModelSerializer):
             'brand',
 
             'rent_fee_per_sqm',
-            'service_fee_per_sqm',
-            'marketing_fee_per_sqm',
-            'turnover_fee',
-
             'rent_fee_indexation_type',
-            'service_fee_indexation_type',
-            'marketing_fee_indexation_type',
-
             'rent_fee_indexation_fixed',
-            'service_fee_indexation_fixed',
-            'marketing_fee_indexation_fixed',
+            'rent_fee_advance_payment_day',
 
-            'contract_signing_date',
-            'contract_expiration_date',
+            'turnover_fee',
+            'turnover_fee_period',
+            'turnover_data_providing_day',
+            'turnover_fee_payment_day',
+
+            'service_fee_per_sqm',
+            'service_fee_indexation_type',
+            'service_fee_indexation_fixed',
+            'service_fee_advance_payment_day',
+
+            'marketing_fee_per_sqm',
+            'marketing_fee_indexation_type',
+            'marketing_fee_indexation_fixed',
+            'marketing_fee_advance_payment_day',
 
             'rent_start_date',
             'stop_billing_date',
@@ -131,29 +137,41 @@ class RentContractSerializer(serializers.ModelSerializer):
             'act_of_transfer_date',
             'premise_return_date',
 
-            'rent_fee_advance_payment_day',
-            'service_fee_advance_payment_day',
-            'marketing_fee_advance_payment_day',
-
-
             # 'duration_years',
             # 'duration_months',
             # 'duration_days',
 
+            'utilities_electricity_compensation_type',
+            'utilities_electricity_counter_number',
+            'utilities_electricity_compensation_fixed_indexation_type',
+            'utilities_electricity_compensation_fixed_indexation_fixed',
+            'utilities_electricity_compensation_payment_day',
+
+            'utilities_cold_water_compensation_type',
+            'utilities_cold_water_counter_number',
+            'utilities_cold_water_compensation_fixed_indexation_type',
+            'utilities_cold_water_compensation_fixed_indexation_fixed',
+            'utilities_cold_water_compensation_payment_day',
+
+            'utilities_hot_water_compensation_type',
+            'utilities_hot_water_counter_number',
+            'utilities_hot_water_compensation_fixed_indexation_type',
+            'utilities_hot_water_compensation_fixed_indexation_fixed',
+            'utilities_hot_water_compensation_payment_day',
+
+            'utilities_gas_compensation_type',
+            'utilities_gas_counter_number',
+            'utilities_gas_compensation_fixed_indexation_type',
+            'utilities_gas_compensation_fixed_indexation_fixed',
+            'utilities_gas_compensation_payment_day',
 
             'CA_utilities_compensation_fee_fixed',
-            'utilities_compensation_type',
             'CA_utilities_compensation_type',
-
-            'utilities_compensation_fixed_indexation_type',
             'CA_utilities_compensation_fixed_indexation_type',
-
-            'utilities_compensation_fixed_indexation_fixed',
             'CA_utilities_compensation_fee_fixed_indexation_type_fixed',
-            # 'act_of_transfer_signed',
-
             'CA_utilities_compensation_fee_fixed_payment_day',
-            'utilities_compensation_fixed_payment_day',
+
+
             'guarantee_deposit_type',
             'guarantee_deposit_amount',
             'guarantee_deposit_number_of_months',
