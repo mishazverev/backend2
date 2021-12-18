@@ -115,7 +115,6 @@ class TenantContractorContacts(models.Model):
 
 
 class RentContract(models.Model):
-
     # --- Main and commercial terms ---
 
     id = models.BigAutoField(primary_key=True)
@@ -221,6 +220,8 @@ class RentContract(models.Model):
         default=utilities_electricity_compensation_types.BY_COUNTERS, )
 
     utilities_electricity_counter_number = models.CharField(max_length=100, null=True, blank=True)
+    utilities_electricity_compensation_fixed_fee = models.DecimalField(null=True, max_digits=10, decimal_places=2,
+                                                                       default=0)
 
     class utilities_electricity_compensation_fixed_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
@@ -253,6 +254,8 @@ class RentContract(models.Model):
         default=utilities_cold_water_compensation_types.BY_COUNTERS, )
 
     utilities_cold_water_counter_number = models.CharField(max_length=100, null=True, blank=True)
+    utilities_cold_water_compensation_fixed_fee = models.DecimalField(null=True, max_digits=10, decimal_places=2,
+                                                                      default=0)
 
     class utilities_cold_water_compensation_fixed_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
@@ -285,6 +288,8 @@ class RentContract(models.Model):
         default=utilities_hot_water_compensation_types.BY_COUNTERS, )
 
     utilities_hot_water_counter_number = models.CharField(max_length=100, null=True, blank=True)
+    utilities_hot_water_compensation_fixed_fee = models.DecimalField(null=True, max_digits=10, decimal_places=2,
+                                                                     default=0)
 
     class utilities_hot_water_compensation_fixed_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
@@ -317,6 +322,7 @@ class RentContract(models.Model):
         default=utilities_gas_compensation_types.BY_COUNTERS, )
 
     utilities_gas_counter_number = models.CharField(max_length=100, null=True, blank=True)
+    utilities_gas_compensation_fixed_fee = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
 
     class utilities_gas_compensation_fixed_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
