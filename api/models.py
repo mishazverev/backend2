@@ -239,7 +239,7 @@ class RentContract(models.Model):
     utilities_electricity_compensation_fixed_indexation_fixed = models.DecimalField(null=True, max_digits=4,
                                                                                     decimal_places=2, default=0)
 
-    utilities_electricity_compensation_payment_day = models.IntegerField(null=True, blank=True, max_digits=2, default=0)
+    utilities_electricity_compensation_payment_day = models.IntegerField(null=True, blank=True, default=0)
 
     # ----- Utilities compensation - consumed by tenant - cold water ---
 
@@ -273,7 +273,7 @@ class RentContract(models.Model):
     utilities_cold_water_compensation_fixed_indexation_fixed = models.DecimalField(null=True, max_digits=4,
                                                                                    decimal_places=2, default=0)
 
-    utilities_cold_water_compensation_payment_day = models.IntegerField(null=True, blank=True, max_digits=2, default=0)
+    utilities_cold_water_compensation_payment_day = models.IntegerField(null=True, blank=True, default=0)
 
     # ----- Utilities compensation - consumed by tenant - hot water ---
 
@@ -307,7 +307,7 @@ class RentContract(models.Model):
     utilities_hot_water_compensation_fixed_indexation_fixed = models.DecimalField(null=True, max_digits=4,
                                                                                   decimal_places=2, default=0)
 
-    utilities_hot_water_compensation_payment_day = models.IntegerField(null=True, blank=True, max_digits=2, default=0)
+    utilities_hot_water_compensation_payment_day = models.IntegerField(null=True, blank=True, default=0)
 
     # ----- Utilities compensation - consumed by tenant - gas ---
 
@@ -340,7 +340,7 @@ class RentContract(models.Model):
     utilities_gas_compensation_fixed_indexation_fixed = models.DecimalField(null=True, max_digits=4,
                                                                             decimal_places=2, default=0)
 
-    utilities_gas_compensation_payment_day = models.IntegerField(null=True, blank=True, max_digits=2, default=0)
+    utilities_gas_compensation_payment_day = models.IntegerField(null=True, blank=True, default=0)
 
     # --- Utilities compensation - Common area (CA) ---
 
@@ -374,7 +374,7 @@ class RentContract(models.Model):
                                                                                     decimal_places=2,
                                                                                     default=0)
 
-    CA_utilities_compensation_fee_payment_day = models.IntegerField(null=True, blank=True, max_digits=2, default=0)
+    CA_utilities_compensation_fee_payment_day = models.IntegerField(null=True, blank=True, default=0)
 
     # --- Guarantee deposit
 
