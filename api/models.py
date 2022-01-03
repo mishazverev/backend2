@@ -123,7 +123,7 @@ class RentContract(models.Model):
     contract_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
 
     premise_id = models.ManyToManyField(PremiseMain)
-    contracted_area = models.DecimalField(max_digits=8, decimal_places=2)
+    contracted_area = models.DecimalField(max_digits=8, decimal_places=2, null=True)
     tenant_contractor_id = models.ForeignKey(TenantContractor, on_delete=DO_NOTHING, null=True, default='')
     brand = models.ForeignKey(Brand, on_delete=DO_NOTHING, null=True)
 
