@@ -407,10 +407,12 @@ class RentContract(models.Model):
 
     insurance_required = models.CharField(
         null=True,
+        blank=True,
         max_length=25,
         choices=insurance_required_options.choices,
         default=insurance_required_options.REQUIRED,
     )
+
     insurance_contract_providing_date = models.DateField(null=True, default=timezone.now, auto_now=False,
                                                          auto_now_add=False)
     insurance_provided = models.BooleanField(null=True, default=None)
