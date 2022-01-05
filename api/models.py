@@ -128,7 +128,7 @@ class RentContract(models.Model):
     brand = models.ForeignKey(Brand, on_delete=DO_NOTHING, null=True)
 
     rent_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2)
-    rent_fee_advance_payment_day = models.IntegerField(null=True, default=10)
+    rent_fee_advance_payment_day = models.IntegerField(null=True, blank=True, default=0)
 
     class rent_fee_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
@@ -157,11 +157,11 @@ class RentContract(models.Model):
         max_length=10,
         choices=turnover_fee_periods.choices,
         default=turnover_fee_periods.month_1, )
-    turnover_data_providing_day = models.IntegerField(null=True, default=10)
-    turnover_fee_payment_day = models.IntegerField(null=True, default=10)
+    turnover_data_providing_day = models.IntegerField(null=True, blank=True, default=0)
+    turnover_fee_payment_day = models.IntegerField(null=True, blank=True, default=0)
 
     service_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
-    service_fee_advance_payment_day = models.IntegerField(null=True, default=10)
+    service_fee_advance_payment_day = models.IntegerField(null=True, blank=True, default=0)
 
     class service_fee_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
@@ -177,7 +177,7 @@ class RentContract(models.Model):
     service_fee_indexation_fixed = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
 
     marketing_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
-    marketing_fee_advance_payment_day = models.IntegerField(null=True, default=10)
+    marketing_fee_advance_payment_day = models.IntegerField(null=True, blank=True, default=0)
 
     class marketing_fee_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
