@@ -119,7 +119,7 @@ class RentContract(models.Model):
 
     id = models.BigAutoField(primary_key=True)
     rent_contract_number = models.CharField(max_length=50, null=True, unique=True)
-    contract_signing_date = models.DateField(default=timezone.now, auto_now=False, auto_now_add=False, null=True)
+    contract_signing_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
     contract_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
 
     premise_id = models.ManyToManyField(PremiseMain)
@@ -197,8 +197,8 @@ class RentContract(models.Model):
 
     # --- Dates ---
 
-    act_of_transfer_date = models.DateField(null=True, default=timezone.now, auto_now=False, auto_now_add=False)
-    rent_start_date = models.DateField(default=timezone.now, auto_now=False, auto_now_add=False)
+    act_of_transfer_date = models.DateField(null=True, auto_now=False, auto_now_add=False)
+    rent_start_date = models.DateField(null=True, auto_now=False, auto_now_add=False)
 
     premise_return_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
     stop_billing_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
