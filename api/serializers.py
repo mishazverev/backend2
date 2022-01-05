@@ -182,7 +182,6 @@ class RentContractSerializer(serializers.ModelSerializer):
             'advance_payment_amount',
             'advance_payment_contract_providing_date',
 
-
             'insurance_required',
             'insurance_contract_providing_date',
             'insurance_provided',

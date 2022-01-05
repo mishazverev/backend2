@@ -118,12 +118,12 @@ class RentContract(models.Model):
     # --- Main and commercial terms ---
 
     id = models.BigAutoField(primary_key=True)
-    rent_contract_number = models.CharField(max_length=50, null=True, unique=True)
-    contract_signing_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
-    contract_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
+    rent_contract_number = models.CharField(max_length=50, null=True, blank=True)
+    contract_signing_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    contract_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
 
     premise_id = models.ManyToManyField(PremiseMain)
-    contracted_area = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+    contracted_area = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
     tenant_contractor_id = models.ForeignKey(TenantContractor, on_delete=DO_NOTHING, null=True, default='')
     brand = models.ForeignKey(Brand, on_delete=DO_NOTHING, null=True)
 
@@ -197,11 +197,11 @@ class RentContract(models.Model):
 
     # --- Dates ---
 
-    act_of_transfer_date = models.DateField(null=True, auto_now=False, auto_now_add=False)
-    rent_start_date = models.DateField(null=True, auto_now=False, auto_now_add=False)
+    act_of_transfer_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    rent_start_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
 
-    premise_return_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
-    stop_billing_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
+    premise_return_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    stop_billing_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
 
     # duration_years = models.IntegerField(null=True)
     # duration_months = models.IntegerField(null=True)
