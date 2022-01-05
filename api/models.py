@@ -128,7 +128,7 @@ class RentContract(models.Model):
     brand = models.ForeignKey(Brand, on_delete=DO_NOTHING, null=True)
 
     rent_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2)
-    rent_fee_advance_payment_day = models.IntegerField(null=True, blank=True, default=0)
+    rent_fee_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
 
     class rent_fee_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
@@ -147,21 +147,23 @@ class RentContract(models.Model):
     turnover_fee = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
 
     class turnover_fee_periods(models.TextChoices):
-        month_1 = '1_month'
-        months_3 = '3_months'
-        months_6 = '6_months'
-        months_12 = '12_months'
+        MONTH1 = '1_month'
+        MONTH3 = '3_months'
+        MONTH6 = '6_months'
+        MONTH12 = '12_months'
 
     turnover_fee_period = models.CharField(
         null=True,
-        max_length=10,
+        blank=True,
+        max_length=20,
         choices=turnover_fee_periods.choices,
-        default=turnover_fee_periods.month_1, )
-    turnover_data_providing_day = models.IntegerField(null=True, blank=True, default=0)
-    turnover_fee_payment_day = models.IntegerField(null=True, blank=True, default=0)
+        default=turnover_fee_periods.MONTH1, )
+
+    turnover_data_providing_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
+    turnover_fee_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
 
     service_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
-    service_fee_advance_payment_day = models.IntegerField(null=True, blank=True, default=0)
+    service_fee_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
 
     class service_fee_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
@@ -177,7 +179,7 @@ class RentContract(models.Model):
     service_fee_indexation_fixed = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
 
     marketing_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
-    marketing_fee_advance_payment_day = models.IntegerField(null=True, blank=True, default=0)
+    marketing_fee_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
 
     class marketing_fee_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
@@ -239,7 +241,7 @@ class RentContract(models.Model):
     utilities_electricity_compensation_fixed_indexation_fixed = models.DecimalField(null=True, max_digits=4,
                                                                                     decimal_places=2, default=0)
 
-    utilities_electricity_compensation_payment_day = models.IntegerField(null=True, blank=True, default=0)
+    utilities_electricity_compensation_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
 
     # ----- Utilities compensation - consumed by tenant - cold water ---
 
@@ -273,7 +275,7 @@ class RentContract(models.Model):
     utilities_cold_water_compensation_fixed_indexation_fixed = models.DecimalField(null=True, max_digits=4,
                                                                                    decimal_places=2, default=0)
 
-    utilities_cold_water_compensation_payment_day = models.IntegerField(null=True, blank=True, default=0)
+    utilities_cold_water_compensation_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
 
     # ----- Utilities compensation - consumed by tenant - hot water ---
 
@@ -307,7 +309,7 @@ class RentContract(models.Model):
     utilities_hot_water_compensation_fixed_indexation_fixed = models.DecimalField(null=True, max_digits=4,
                                                                                   decimal_places=2, default=0)
 
-    utilities_hot_water_compensation_payment_day = models.IntegerField(null=True, blank=True, default=0)
+    utilities_hot_water_compensation_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
 
     # ----- Utilities compensation - consumed by tenant - gas ---
 
@@ -340,7 +342,7 @@ class RentContract(models.Model):
     utilities_gas_compensation_fixed_indexation_fixed = models.DecimalField(null=True, max_digits=4,
                                                                             decimal_places=2, default=0)
 
-    utilities_gas_compensation_payment_day = models.IntegerField(null=True, blank=True, default=0)
+    utilities_gas_compensation_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
 
     # --- Utilities compensation - Common area (CA) ---
 
@@ -374,7 +376,7 @@ class RentContract(models.Model):
                                                                                     decimal_places=2,
                                                                                     default=0)
 
-    CA_utilities_compensation_fee_payment_day = models.IntegerField(null=True, blank=True, default=0)
+    CA_utilities_compensation_fee_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
 
     # --- Guarantee deposit
 
