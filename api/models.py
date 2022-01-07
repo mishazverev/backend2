@@ -21,7 +21,7 @@ class CategoryTag(models.Model):
 class Brand(models.Model):
     id = models.BigAutoField(primary_key=True)
     brand_name = models.CharField(max_length=50, unique=True)
-    brand_description = models.CharField(null=True, max_length=200)
+    brand_description = models.CharField(null=True, max_length=200, blank=True)
     brand_category_tag = models.ManyToManyField(CategoryTag, null=True, blank=True)
 
     retail_premise_type = models.CharField(max_length=30, null=True, blank=True)
