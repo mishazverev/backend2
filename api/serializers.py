@@ -143,24 +143,28 @@ class RentContractSerializer(serializers.ModelSerializer):
 
             'utilities_electricity_compensation_type',
             'utilities_electricity_counter_number',
+            'utilities_electricity_compensation_fixed_fee',
             'utilities_electricity_compensation_fixed_indexation_type',
             'utilities_electricity_compensation_fixed_indexation_fixed',
             'utilities_electricity_compensation_payment_day',
 
             'utilities_cold_water_compensation_type',
             'utilities_cold_water_counter_number',
+            'utilities_cold_water_compensation_fixed_fee',
             'utilities_cold_water_compensation_fixed_indexation_type',
             'utilities_cold_water_compensation_fixed_indexation_fixed',
             'utilities_cold_water_compensation_payment_day',
 
             'utilities_hot_water_compensation_type',
             'utilities_hot_water_counter_number',
+            'utilities_hot_water_compensation_fixed_fee',
             'utilities_hot_water_compensation_fixed_indexation_type',
             'utilities_hot_water_compensation_fixed_indexation_fixed',
             'utilities_hot_water_compensation_payment_day',
 
             'utilities_gas_compensation_type',
             'utilities_gas_counter_number',
+            'utilities_gas_compensation_fixed_fee',
             'utilities_gas_compensation_fixed_indexation_type',
             'utilities_gas_compensation_fixed_indexation_fixed',
             'utilities_gas_compensation_payment_day',
