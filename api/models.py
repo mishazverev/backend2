@@ -427,19 +427,19 @@ class RentContract(models.Model):
 
     # --- Advance payment
 
-    class advance_payment_required_options(models.TextChoices):
-        REQUIRED = 'Required'
-        NOT_REQUIRED = 'Not required'
-
-    advance_payment_required = models.CharField(
-        null=True,
-        max_length=25,
-        choices=advance_payment_required_options.choices,
-        default=advance_payment_required_options.REQUIRED,
-    )
-    advance_payment_contract_providing_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
-    advance_payment_paid = models.BooleanField(null=True, default=None)
-    advance_payment_amount = models.DecimalField(null=True, max_digits=20, decimal_places=2)
+    # class advance_payment_required_options(models.TextChoices):
+    #     REQUIRED = 'Required'
+    #     NOT_REQUIRED = 'Not required'
+    #
+    # advance_payment_required = models.CharField(
+    #     null=True,
+    #     max_length=25,
+    #     choices=advance_payment_required_options.choices,
+    #     default=advance_payment_required_options.REQUIRED,
+    # )
+    # advance_payment_contract_providing_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    # advance_payment_paid = models.BooleanField(null=True, default=None)
+    # advance_payment_amount = models.DecimalField(null=True, max_digits=20, decimal_places=2)
 
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
