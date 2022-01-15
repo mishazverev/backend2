@@ -194,3 +194,71 @@ class RentContractSerializer(serializers.ModelSerializer):
             'last_updated',
             'user_updated'
         )
+
+
+class RentContractPeriodicalFeeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RentContractPeriodicalFee
+        fields = (
+            'id',
+            'rent_contract_id',
+            'rent_contract_additional_agreement_id',
+            'periodical_fee_name',
+            'periodical_fee_calculation_period',
+            'periodical_fee_payment_period',
+            'periodical_fee_per_sqm',
+            'periodical_fee_total_payment',
+            'periodical_fee_advance_payment_day',
+            'periodical_fee_post_payment_day',
+            'periodical_fee_indexation_type',
+            'periodical_payment_indexation_types_indexation_fixed',
+        )
+
+
+class RentContractOneTimeFeeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RentContractOneTimeFee
+        fields = (
+            'id',
+            'rent_contract_id',
+            'rent_contract_additional_agreement_id',
+            'one_time_fee_name',
+            'one_time_fee_per_sqm',
+            'one_time_fee_total_payment',
+            'one_time_fee_contract_payment_date',
+            'one_time_fee_contract_triggering_event_date',
+            'one_time_fee_contract_relative_payment_day',
+        )
+
+
+class CounterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Counter
+        fields = (
+            'id',
+            'counter_number',
+            'counter_utility_type',
+            'counter_description',
+        )
+
+
+class RentContractUtilityFeeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RentContractUtilityFee
+        fields = (
+            'id',
+            'rent_contract_id',
+            'rent_contract_additional_agreement_id',
+            'utility_name',
+            'utility_compensation_type'
+            'utility_counter_numbers',
+            'utility_compensation_calculation_period',
+            'utility_compensation_payment_period_type',
+            'utility_compensation_fixed_fee',
+            'utility_compensation_fixed_indexation_type',
+            'utility_compensation_fixed_indexation_fixed',
+            'utility_compensation_advance_payment_day',
+            'utility_compensation_counter_data_providing_day',
+            'utility_compensation_post_payment_day',
+
+        )
