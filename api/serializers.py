@@ -438,7 +438,7 @@ class RentContractUtilityFeeSetupSerializer(serializers.ModelSerializer):
             'id',
             'rent_contract_setup_id',
             'utility_name',
-            'compensation_type'
+            'compensation_type',
             'compensation_calculation_period',
             'compensation_payment_period',
             'compensation_fixed_fee',
