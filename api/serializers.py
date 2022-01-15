@@ -266,7 +266,7 @@ class AdditionalAgreementSerializer(serializers.ModelSerializer):
             'insurance_required',
             'insurance_contract_providing_date',
             'insurance_actual_providing_date',
-            'insurance_expiration_date,',
+            'insurance_expiration_date',
 
             'last_updated',
             'user_updated'
@@ -397,7 +397,7 @@ class RentContractPeriodicalFeeSetupSerializer(serializers.ModelSerializer):
         model = RentContractPeriodicalFeeSetup
         fields = (
             'id',
-            'rent_contract_id',
+            'rent_contract_setup_id',
             'periodical_fee_name',
             'periodical_fee_calculation_period',
             'periodical_fee_payment_period',
@@ -418,7 +418,7 @@ class RentContractOneTimeFeeSetupSerializer(serializers.ModelSerializer):
         model = RentContractOneTimeFeeSetup
         fields = (
             'id',
-            'rent_contract_id',
+            'rent_contract_setup_id',
             'one_time_fee_name',
             'one_time_fee_calculation_method',
             'one_time_fee_payment_term',
