@@ -146,7 +146,7 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     rent_fee_indexation_type = models.CharField(
         null=True,
@@ -182,7 +182,7 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     service_fee_indexation_type = models.CharField(
         null=True,
@@ -199,7 +199,7 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     marketing_fee_indexation_type = models.CharField(
         null=True,
@@ -244,7 +244,7 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     utilities_electricity_compensation_fixed_indexation_type = models.CharField(
         null=True,
@@ -279,7 +279,7 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     utilities_cold_water_compensation_fixed_indexation_type = models.CharField(
         null=True,
@@ -314,7 +314,7 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     utilities_hot_water_compensation_fixed_indexation_type = models.CharField(
         null=True,
@@ -348,7 +348,7 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     utilities_gas_compensation_fixed_indexation_type = models.CharField(
         null=True,
@@ -380,7 +380,7 @@ class RentContract(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     CA_utilities_compensation_fixed_indexation_type = models.CharField(
         null=True,
@@ -452,15 +452,180 @@ class RentContract(models.Model):
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
 
+class AdditionalAgreement(models.Model):
+    # --- Main and commercial terms ---
+    id = models.BigAutoField(primary_key=True)
+    rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
+
+    additional_agreement_number = models.CharField(max_length=50, null=True, blank=True)
+    additional_agreement_signing_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    additional_agreement_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+
+    premise_id = models.ManyToManyField(PremiseMain)
+    contracted_area = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    tenant_contractor_id = models.ForeignKey(TenantContractor, on_delete=DO_NOTHING, null=True, default='')
+    brand = models.ForeignKey(Brand, on_delete=DO_NOTHING, null=True)
+
+    # --- Dates ---
+
+    act_of_transfer_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    rent_start_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+
+    premise_return_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    stop_billing_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+
+    # Rental Payment
+    class fixed_rent_calculation_period_types(models.TextChoices):
+        DAY = 'Day'
+        WEEK = 'Week'
+        MONTH = 'Month'
+        MONTHS3 = '3_months'
+        MONTHS6 = '6_months'
+        YEAR = 'Year'
+
+    fixed_rent_calculation_period = models.CharField(
+        null=True,
+        max_length=20,
+        choices=fixed_rent_calculation_period_types.choices,
+        default=fixed_rent_calculation_period_types.MONTH, )
+
+    class fixed_rent_payment_period_types(models.TextChoices):
+        DAY = 'Day'
+        WEEK = 'Week'
+        MONTH = 'Month'
+        MONTHS3 = '3_months'
+        MONTHS6 = '6_months'
+        YEAR = 'Year'
+
+    fixed_rent_payment_period = models.CharField(
+        null=True,
+        max_length=20,
+        choices=fixed_rent_payment_period_types.choices,
+        default=fixed_rent_payment_period_types.MONTH, )
+
+    fixed_rent_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+    fixed_rent_total_payment = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+
+    # In relevance with fixed_rent_payment_period - previous period day
+    fixed_rent_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
+                                                         default=0)
+    # Number of days after period is over
+    fixed_rent_post_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
+                                                      default=0)
+
+    class fixed_rent_indexation_types(models.TextChoices):
+        FIXED = 'Fixed'
+        CPI = 'CPI'
+        REVISABLE = 'Revisable'
+        NON_INDEXABLE = 'Non_Indexable'
+
+    fixed_rent_indexation_type = models.CharField(
+        null=True,
+        max_length=20,
+        choices=fixed_rent_indexation_types.choices,
+        default=fixed_rent_indexation_types.FIXED, )
+
+    fixed_rent_indexation_fixed = models.DecimalField(null=True, max_digits=4,
+                                                      decimal_places=2, default=0)
+    # Turnover fee
+
+    turnover_fee = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
+
+    class turnover_fee_periods(models.TextChoices):
+        MONTH1 = '1_month'
+        MONTH3 = '3_months'
+        MONTH6 = '6_months'
+        MONTH12 = '12_months'
+
+    turnover_fee_period = models.CharField(
+        null=True,
+        blank=True,
+        max_length=20,
+        choices=turnover_fee_periods.choices,
+        default=turnover_fee_periods.MONTH1, )
+
+    turnover_data_providing_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
+    turnover_fee_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
+
+    # --- Utilities compensation - Common area (CA) ---
+
+    class CA_utilities_compensation_types(models.TextChoices):
+        FIXED = 'Fixed'
+        PROPORTIONAL_GLA = 'Proportional_to_GLA'
+        PROPORTIONAL_LEASED = 'Proportional_to_leased area'
+        NONE = 'None'
+
+    CA_utilities_compensation_type = models.CharField(
+        null=True,
+        max_length=50,
+        choices=CA_utilities_compensation_types.choices,
+        default=CA_utilities_compensation_types.PROPORTIONAL_GLA, )
+
+    class CA_utilities_compensation_fixed_indexation_types(models.TextChoices):
+        FIXED = 'Fixed'
+        CPI = 'CPI'
+        REVISABLE = 'Revisable'
+        NON_INDEXABLE = 'Non_Indexable'
+
+    CA_utilities_compensation_fixed_indexation_type = models.CharField(
+        null=True,
+        max_length=20,
+        choices=CA_utilities_compensation_fixed_indexation_types.choices,
+        default=CA_utilities_compensation_fixed_indexation_types.FIXED, )
+
+    CA_utilities_compensation_fee_fixed = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+
+    CA_utilities_compensation_fee_fixed_indexation_type_fixed = models.DecimalField(null=True, max_digits=4,
+                                                                                    decimal_places=2,
+                                                                                    default=0)
+
+    CA_utilities_compensation_fee_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
+                                                                    decimal_places=0, default=0)
+
+    # --- Guarantee deposit
+    guarantee_deposit_required = models.BooleanField(default=True)
+    guarantee_deposit_coverage_number_of_periods = models.DecimalField(null=True, max_digits=20, decimal_places=2)
+
+    class guarantee_deposit_types(models.TextChoices):
+        CASH = 'Cash'
+        BANK_GUARANTEE = 'Bank guarantee'
+        CORPORATE_GUARANTEE = 'Corporate guarantee'
+
+    guarantee_deposit_type = models.CharField(
+        null=True,
+        max_length=25,
+        choices=guarantee_deposit_types.choices,
+        default=guarantee_deposit_types.CASH,
+    )
+
+    guarantee_deposit_amount = models.DecimalField(null=True, max_digits=20, decimal_places=2)
+    guarantee_deposit_contract_providing_date = models.DateField(null=True, auto_now=False,
+                                                                 auto_now_add=False)
+    guarantee_deposit_actual_providing_date = models.DateField(null=True, auto_now=False,
+                                                               auto_now_add=False)
+    guarantee_bank_guarantee_expiration_date = models.DateField(null=True, auto_now=False,
+                                                                auto_now_add=False)
+
+    # --- Insurance
+    insurance_required = models.BooleanField(default=True)
+    insurance_contract_providing_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    insurance_actual_providing_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    insurance_expiration_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+
 class RentContractPeriodicalFee(models.Model):
-    # Is used for regular fixed fees (rent, service, marketing, etc)
+    # Is used for regular fixed fees (service fee, marketing fee, etc)
 
     id = models.BigAutoField(primary_key=True)
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
-    rent_contract_additional_agreement_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True,
-                                                              default='')
+    rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
+                                                              null=True, )
     periodical_fee_name = models.CharField(max_length=100, null=True, blank=True)
 
+    # Period of fee calculation
     class periodical_fee_calculation_period_types(models.TextChoices):
         DAY = 'Day'
         WEEK = 'Week'
@@ -475,6 +640,7 @@ class RentContractPeriodicalFee(models.Model):
         choices=periodical_fee_calculation_period_types.choices,
         default=periodical_fee_calculation_period_types.MONTH, )
 
+    # Period of fee payment
     class periodical_fee_payment_period_types(models.TextChoices):
         DAY = 'Day'
         WEEK = 'Week'
@@ -489,6 +655,19 @@ class RentContractPeriodicalFee(models.Model):
         choices=periodical_fee_payment_period_types.choices,
         default=periodical_fee_payment_period_types.MONTH, )
 
+    # The way how periodical fee is calculated
+    class periodical_fee_calculation_methods(models.TextChoices):
+        PER_SQM = 'Per_sqm'
+        TOTAL = 'Total'
+        NON_INDEXABLE = 'Non_Indexable'
+
+    periodical_fee_calculation_method = models.CharField(
+        null=True,
+        max_length=20,
+        choices=periodical_fee_calculation_methods.choices,
+        default=periodical_fee_calculation_methods.PER_SQM, )
+
+    # Types of periodical fee calculation
     periodical_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
     periodical_fee_total_payment = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
 
@@ -499,35 +678,82 @@ class RentContractPeriodicalFee(models.Model):
     periodical_fee_post_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
                                                           default=0)
 
+    # Periodical fee indexation
     class periodical_fee_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     periodical_fee_indexation_type = models.CharField(
         null=True,
         max_length=20,
         choices=periodical_fee_indexation_types.choices,
         default=periodical_fee_indexation_types.FIXED, )
-    periodical_payment_indexation_types_indexation_fixed = models.DecimalField(null=True, max_digits=4,
-                                                                               decimal_places=2, default=0)
+
+    periodical_payment_indexation_fixed = models.DecimalField(null=True, max_digits=4,
+                                                              decimal_places=2, default=0)
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
 
 class RentContractOneTimeFee(models.Model):
     id = models.BigAutoField(primary_key=True)
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
-    rent_contract_additional_agreement_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True,
-                                                              default='')
+    rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
+                                                              null=True, )
     one_time_fee_name = models.CharField(max_length=100, null=True, blank=True)
+
+    # The way how one-time fee is calculated
+    class one_time_fee_calculation_methods(models.TextChoices):
+        PER_SQM = 'Per_sqm'
+        TOTAL = 'Total'
+        NON_INDEXABLE = 'Non_Indexable'
+
+    one_time_fee_calculation_method = models.CharField(
+        null=True,
+        max_length=20,
+        choices=one_time_fee_calculation_methods.choices,
+        default=one_time_fee_calculation_methods.PER_SQM, )
+
+    # The term of one-time fee payment
+
+    class one_time_fee_payment_terms(models.TextChoices):
+        FIXED_DATE = 'Fixed_date'
+        TRIGGERING_EVENT_DATE = 'Triggering_event_date'
+        NOT_FIXED = 'Not_fixed'
+
+    one_time_fee_payment_term = models.CharField(
+        null=True,
+        max_length=50,
+        choices=one_time_fee_payment_terms.choices,
+        default=one_time_fee_payment_terms.FIXED_DATE, )
+
+    # Type of events triggering one-time fee payment
+    class one_time_fee_payment_triggering_events(models.TextChoices):
+        CONTRACT_SIGNING_DATE = 'Contract_signing_date'
+        ACT_OF_TRANSFER_DATE = 'Premise_transfer_date'
+        RENT_START_DATE = 'Start_of_commercial_activity'
+
+    one_time_fee_payment_triggering_event = models.CharField(
+        null=True,
+        max_length=50,
+        choices=one_time_fee_payment_triggering_events.choices,
+        default=one_time_fee_payment_triggering_events.ACT_OF_TRANSFER_DATE, )
+
+    # One-time fee amount
     one_time_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
     one_time_fee_total_payment = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+
+    # One-time fee payment dated
     one_time_fee_contract_payment_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
-    one_time_fee_contract_triggering_event_date = models.DateField(auto_now=False, auto_now_add=False, null=True,
-                                                                   blank=True)
-    one_time_fee_contract_relative_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
-                                                                     decimal_places=0,
-                                                                     default=0)
+    one_time_fee_contract_triggering_event_related_payment_day = models.DecimalField(null=True, blank=True,
+                                                                                     max_digits=2,
+                                                                                     decimal_places=0,
+                                                                                     default=0)
+
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
 
 class Counter(models.Model):
@@ -535,6 +761,8 @@ class Counter(models.Model):
     counter_number = models.CharField(max_length=50, unique=True)
     counter_utility_type = models.CharField(max_length=50, unique=True)
     counter_description = models.CharField(null=True, max_length=200, blank=True)
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ['counter_number']
@@ -546,7 +774,8 @@ class Counter(models.Model):
 class RentContractUtilityFee(models.Model):
     id = models.BigAutoField(primary_key=True)
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
-    rent_contract_additional_agreement_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True,)
+    rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
+                                                              null=True, )
     utility_name = models.CharField(max_length=100, null=True, blank=True)
 
     # usually -  USING COUNTER
@@ -590,30 +819,31 @@ class RentContractUtilityFee(models.Model):
         YEAR = 'Year'
 
     # BOTH USING COUNTER and FIXED Period of utility compensation payment (usually - one month)
-    compensation_payment_period_type = models.CharField(
+    compensation_payment_period = models.CharField(
         null=True,
         max_length=20,
         choices=compensation_payment_period_types.choices,
         default=compensation_payment_period_types.MONTH, )
+
     # IF FIXED COMPENSATION ONLY - regular fixed utility compensation fee amount
     compensation_fixed_fee = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
 
     # IF FIXED COMPENSATION ONLY - indexation type of fixed utility compensation
-    class compensation_fixed_indexation_types(models.TextChoices):
+    class compensation_fixed_fee_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     # IF FIXED COMPENSATION ONLY - indexation type of fixed utility compensation
-    compensation_fixed_indexation_type = models.CharField(
+    compensation_fixed_fee_indexation_type = models.CharField(
         null=True,
         max_length=20,
-        choices=compensation_fixed_indexation_types.choices,
-        default=compensation_fixed_indexation_types.FIXED, )
+        choices=compensation_fixed_fee_indexation_types.choices,
+        default=compensation_fixed_fee_indexation_types.FIXED, )
     # IF FIXED COMPENSATION ONLY - annual indexation % of fixed utility compensation
-    compensation_fixed_indexation_fixed = models.DecimalField(null=True, max_digits=4,
-                                                              decimal_places=2, default=0)
+    compensation_fixed_fee_indexation_fixed = models.DecimalField(null=True, max_digits=4,
+                                                                  decimal_places=2, default=0)
     # IF FIXED COMPENSATION ONLY - In relevance with compensation_payment_period_types - previous period day
     compensation_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
                                                            decimal_places=0,
@@ -625,7 +855,8 @@ class RentContractUtilityFee(models.Model):
     # BOTH USING COUNTER and FIXED - Limited number of days after period is over to make payment
     compensation_post_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
                                                         default=0)
-
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
 
 class RentContractSetup(models.Model):
@@ -678,7 +909,7 @@ class RentContractSetup(models.Model):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     fixed_rent_indexation_type = models.CharField(
         null=True,
@@ -686,8 +917,8 @@ class RentContractSetup(models.Model):
         choices=fixed_rent_indexation_types.choices,
         default=fixed_rent_indexation_types.FIXED, )
 
-    fixed_rent_indexation_types_indexation_fixed = models.DecimalField(null=True, max_digits=4,
-                                                                       decimal_places=2, default=0)
+    fixed_rent_indexation_fixed = models.DecimalField(null=True, max_digits=4,
+                                                      decimal_places=2, default=0)
     # Turnover fee
 
     turnover_fee = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
@@ -712,21 +943,21 @@ class RentContractSetup(models.Model):
 
     class CA_utilities_compensation_types(models.TextChoices):
         FIXED = 'Fixed'
-        PROPORTIONAL_LEASED = 'Proportional to leased area'
-        PROPORTIONAL_GLA = 'Proportional to GLA'
+        PROPORTIONAL_GLA = 'Proportional_to_GLA'
+        PROPORTIONAL_LEASED = 'Proportional_to_leased area'
         NONE = 'None'
 
     CA_utilities_compensation_type = models.CharField(
         null=True,
         max_length=50,
         choices=CA_utilities_compensation_types.choices,
-        default=CA_utilities_compensation_types.PROPORTIONAL_LEASED, )
+        default=CA_utilities_compensation_types.PROPORTIONAL_GLA, )
 
     class CA_utilities_compensation_fixed_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     CA_utilities_compensation_fixed_indexation_type = models.CharField(
         null=True,
@@ -749,20 +980,19 @@ class RentContractSetup(models.Model):
 
     # --- Insurance
     insurance_required = models.BooleanField(default=True)
+
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
 
-
-class RentContractPeriodicalFee(models.Model):
-    # Is used for regular fixed fees (rent, service, marketing, etc)
+class RentContractPeriodicalFeeSetup(models.Model):
+    # Is used for regular fixed fees (service fee, marketing fee, etc)
 
     id = models.BigAutoField(primary_key=True)
-    rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
-    rent_contract_additional_agreement_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True,
-                                                              default='')
+    rent_contract_setup_id = models.ForeignKey(RentContractSetup, on_delete=models.CASCADE, null=True, default='')
     periodical_fee_name = models.CharField(max_length=100, null=True, blank=True)
 
+    # Period of fee calculation
     class periodical_fee_calculation_period_types(models.TextChoices):
         DAY = 'Day'
         WEEK = 'Week'
@@ -777,6 +1007,7 @@ class RentContractPeriodicalFee(models.Model):
         choices=periodical_fee_calculation_period_types.choices,
         default=periodical_fee_calculation_period_types.MONTH, )
 
+    # Period of fee payment
     class periodical_fee_payment_period_types(models.TextChoices):
         DAY = 'Day'
         WEEK = 'Week'
@@ -791,6 +1022,19 @@ class RentContractPeriodicalFee(models.Model):
         choices=periodical_fee_payment_period_types.choices,
         default=periodical_fee_payment_period_types.MONTH, )
 
+    # The way how periodical fee is calculated
+    class periodical_fee_calculation_methods(models.TextChoices):
+        PER_SQM = 'Per_sqm'
+        TOTAL = 'Total'
+        NON_INDEXABLE = 'Non_Indexable'
+
+    periodical_fee_calculation_method = models.CharField(
+        null=True,
+        max_length=20,
+        choices=periodical_fee_calculation_methods.choices,
+        default=periodical_fee_calculation_methods.PER_SQM, )
+
+    # Types of periodical fee calculation
     periodical_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
     periodical_fee_total_payment = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
 
@@ -801,37 +1045,43 @@ class RentContractPeriodicalFee(models.Model):
     periodical_fee_post_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
                                                           default=0)
 
+    # Periodical fee indexation
     class periodical_fee_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     periodical_fee_indexation_type = models.CharField(
         null=True,
         max_length=20,
         choices=periodical_fee_indexation_types.choices,
         default=periodical_fee_indexation_types.FIXED, )
-    periodical_payment_indexation_types_indexation_fixed = models.DecimalField(null=True, max_digits=4,
-                                                                               decimal_places=2, default=0)
+
+    periodical_payment_indexation_fixed = models.DecimalField(null=True, max_digits=4,
+                                                              decimal_places=2, default=0)
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
 
 class RentContractOneTimeFeeSetup(models.Model):
     id = models.BigAutoField(primary_key=True)
-    rent_contract_setup = models.ForeignKey(RentContractSetup, on_delete=models.CASCADE, null=True, default='')
+    rent_contract_setup_id = models.ForeignKey(RentContractSetup, on_delete=models.CASCADE, null=True, default='')
     one_time_fee_name = models.CharField(max_length=100, null=True, blank=True)
 
-    class one_time_fee_amount_types(models.TextChoices):
+    # The way how one-time fee is calculated
+    class one_time_fee_calculation_methods(models.TextChoices):
         PER_SQM = 'Per_sqm'
         TOTAL = 'Total'
-        SAME_FIXED = 'Same_fixed'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
-    one_time_fee_amount_type = models.CharField(
+    one_time_fee_calculation_method = models.CharField(
         null=True,
         max_length=20,
-        choices=one_time_fee_amount_types.choices,
-        default=one_time_fee_amount_types.PER_SQM, )
+        choices=one_time_fee_calculation_methods.choices,
+        default=one_time_fee_calculation_methods.PER_SQM, )
+
+    # The term of one-time fee payment
 
     class one_time_fee_payment_terms(models.TextChoices):
         FIXED_DATE = 'Fixed_date'
@@ -840,39 +1090,44 @@ class RentContractOneTimeFeeSetup(models.Model):
 
     one_time_fee_payment_term = models.CharField(
         null=True,
-        max_length=20,
-        choices=one_time_fee_amount_types.choices,
-        default=one_time_fee_amount_types.PER_SQM,)
+        max_length=50,
+        choices=one_time_fee_payment_terms.choices,
+        default=one_time_fee_payment_terms.FIXED_DATE, )
 
+    # Type of events triggering one-time fee payment
     class one_time_fee_payment_triggering_events(models.TextChoices):
-        FIXED_DATE = 'Fixed_date'
-        TRIGGERING_EVENT_DATE = 'Triggering_event_date'
-        NOT_FIXED = 'Not_fixed'
+        CONTRACT_SIGNING_DATE = 'Contract_signing_date'
+        ACT_OF_TRANSFER_DATE = 'Premise_transfer_date'
+        RENT_START_DATE = 'Start_of_commercial_activity'
 
     one_time_fee_payment_triggering_event = models.CharField(
         null=True,
-        max_length=20,
+        max_length=50,
         choices=one_time_fee_payment_triggering_events.choices,
-        default=one_time_fee_payment_triggering_events.PER_SQM,)
+        default=one_time_fee_payment_triggering_events.ACT_OF_TRANSFER_DATE, )
 
+    # One-time fee amount
     one_time_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
     one_time_fee_total_payment = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+
+    # One-time fee payment dated
     one_time_fee_contract_payment_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
-    one_time_fee_contract_triggering_event_date = models.DateField(auto_now=False, auto_now_add=False, null=True,
-                                                                   blank=True)
-    one_time_fee_contract_relative_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
-                                                                     decimal_places=0,
-                                                                     default=0)
+    one_time_fee_contract_triggering_event_related_payment_day = models.DecimalField(null=True, blank=True,
+                                                                                     max_digits=2,
+                                                                                     decimal_places=0,
+                                                                                     default=0)
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
 
 class RentContractUtilityFeeSetup(models.Model):
     id = models.BigAutoField(primary_key=True)
-    rent_contract_setup = models.ForeignKey(RentContractSetup, on_delete=models.CASCADE, null=True, default='')
+    rent_contract_setup_id = models.ForeignKey(RentContractSetup, on_delete=models.CASCADE, null=True, default='')
     utility_name = models.CharField(max_length=100, null=True, blank=True)
 
     # usually -  USING COUNTER
     class compensation_types(models.TextChoices):
-        USING_COUNTER = 'Using counter'
+        USING_COUNTER = 'Using_counter'
         FIXED = 'Fixed'
         NONE = 'None'
 
@@ -908,28 +1163,28 @@ class RentContractUtilityFeeSetup(models.Model):
         YEAR = 'Year'
 
     # BOTH USING COUNTER and FIXED Period of utility compensation payment (usually - one month)
-    compensation_payment_period_type = models.CharField(
+    compensation_payment_period = models.CharField(
         null=True,
         max_length=20,
         choices=compensation_payment_period_types.choices,
         default=compensation_payment_period_types.MONTH, )
 
     # IF FIXED COMPENSATION ONLY - indexation type of fixed utility compensation
-    class compensation_fixed_indexation_types(models.TextChoices):
+    class compensation_fixed_fee_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
         CPI = 'CPI'
         REVISABLE = 'Revisable'
-        NONINDEXABLE = 'NonIndexable'
+        NON_INDEXABLE = 'Non_Indexable'
 
     # IF FIXED COMPENSATION ONLY - indexation type of fixed utility compensation
-    compensation_fixed_indexation_type = models.CharField(
+    compensation_fixed_fee_indexation_type = models.CharField(
         null=True,
         max_length=20,
-        choices=compensation_fixed_indexation_types.choices,
-        default=compensation_fixed_indexation_types.FIXED, )
+        choices=compensation_fixed_fee_indexation_types.choices,
+        default=compensation_fixed_fee_indexation_types.FIXED, )
     # IF FIXED COMPENSATION ONLY - annual indexation % of fixed utility compensation
-    compensation_fixed_indexation_fixed = models.DecimalField(null=True, max_digits=4,
-                                                              decimal_places=2, default=0)
+    compensation_fixed_fee_indexation_fixed = models.DecimalField(null=True, max_digits=4,
+                                                                  decimal_places=2, default=0)
     # IF FIXED COMPENSATION ONLY - In relevance with compensation_payment_period_types - previous period day
     compensation_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
                                                            decimal_places=0,
@@ -941,4 +1196,5 @@ class RentContractUtilityFeeSetup(models.Model):
     # BOTH USING COUNTER and FIXED - Limited number of days after period is over to make payment
     compensation_post_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
                                                         default=0)
-
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
