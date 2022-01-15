@@ -53,7 +53,7 @@ class RentContractViewSet(viewsets.ModelViewSet):
     serializer_class = RentContractSerializer
 
 
-class Building(viewsets.ModelViewSet):
+class BuildingViewSet(viewsets.ModelViewSet):
     queryset = Building.objects.all()
     serializer_class = BuildingSerializer
 
