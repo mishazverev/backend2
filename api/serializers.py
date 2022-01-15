@@ -230,7 +230,7 @@ class AdditionalAgreementSerializer(serializers.ModelSerializer):
 
             'act_of_transfer_date',
             'rent_start_date',
-            'premise_return_date'
+            'premise_return_date',
             'stop_billing_date',
 
             'fixed_rent_calculation_period',
@@ -266,7 +266,7 @@ class AdditionalAgreementSerializer(serializers.ModelSerializer):
             'insurance_required',
             'insurance_contract_providing_date',
             'insurance_actual_providing_date',
-            'insurance_expiration_date,'
+            'insurance_expiration_date,',
 
             'last_updated',
             'user_updated'
@@ -338,7 +338,7 @@ class RentContractUtilityFeeSerializer(serializers.ModelSerializer):
             'rent_contract_id',
             'rent_contract_additional_agreement_id',
             'utility_name',
-            'compensation_type'
+            'compensation_type',
             'counter_numbers',
             'compensation_calculation_period',
             'compensation_payment_period',
@@ -358,7 +358,7 @@ class RentContractSetupSerializer(serializers.ModelSerializer):
         model = RentContractSetup
         fields = (
             'id',
-            'building_id'
+            'building_id',
 
             'fixed_rent_calculation_period',
             'fixed_rent_payment_period',
