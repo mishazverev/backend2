@@ -1172,6 +1172,9 @@ class RentContractUtilityFeeSetup(models.Model):
         choices=compensation_payment_period_types.choices,
         default=compensation_payment_period_types.MONTH, )
 
+    # IF FIXED COMPENSATION ONLY - regular fixed utility compensation fee amount
+    compensation_fixed_fee = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+
     # IF FIXED COMPENSATION ONLY - indexation type of fixed utility compensation
     class compensation_fixed_fee_indexation_types(models.TextChoices):
         FIXED = 'Fixed'
