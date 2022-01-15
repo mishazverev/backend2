@@ -17,6 +17,23 @@ class BrandSerializer(serializers.ModelSerializer):
                   'needed_water_supply', 'needed_additional_requirements')
 
 
+class BuildingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Building
+        fields = (
+            'id',
+            'address_postal_index',
+            'address_country',
+            'address_city',
+            'address_street_number',
+            'number_of_floors',
+            'description',
+            'last_updated',
+            'user_updated'
+
+        )
+
+
 class PremiseMainSerializer(serializers.ModelSerializer):
     class Meta:
         model = PremiseMain
@@ -194,6 +211,67 @@ class RentContractSerializer(serializers.ModelSerializer):
             'last_updated',
             'user_updated'
         )
+
+
+class AdditionalAgreementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdditionalAgreement
+        fields = (
+            'id',
+            'rent_contract_id',
+            'additional_agreement_number',
+            'additional_agreement_signing_date',
+            'additional_agreement_expiration_date',
+
+            'premise_id',
+            'contracted_area',
+            'tenant_contractor_id',
+            'brand',
+
+            'act_of_transfer_date',
+            'rent_start_date',
+            'premise_return_date'
+            'stop_billing_date',
+
+            'fixed_rent_calculation_period',
+            'fixed_rent_payment_period',
+
+            'fixed_rent_per_sqm',
+            'fixed_rent_total_payment',
+            'fixed_rent_advance_payment_day',
+            'fixed_rent_post_payment_day',
+            'fixed_rent_indexation_type',
+            'fixed_rent_indexation_fixed',
+
+            'turnover_fee',
+            'turnover_fee_period',
+            'turnover_data_providing_day',
+            'turnover_fee_payment_day',
+
+            'CA_utilities_compensation_type',
+            'CA_utilities_compensation_fixed_indexation_type',
+
+            'CA_utilities_compensation_fee_fixed',
+            'CA_utilities_compensation_fee_fixed_indexation_type_fixed',
+            'CA_utilities_compensation_fee_payment_day',
+
+            'guarantee_deposit_required',
+            'guarantee_deposit_coverage_number_of_periods',
+            'guarantee_deposit_type',
+            'guarantee_deposit_amount',
+            'guarantee_deposit_contract_providing_date',
+            'guarantee_deposit_actual_providing_date',
+            'guarantee_bank_guarantee_expiration_date',
+
+            'insurance_required',
+            'insurance_contract_providing_date',
+            'insurance_actual_providing_date',
+            'insurance_expiration_date,'
+
+            'last_updated',
+            'user_updated'
+        )
+
 
 
 class RentContractPeriodicalFeeSerializer(serializers.ModelSerializer):

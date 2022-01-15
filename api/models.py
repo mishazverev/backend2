@@ -52,6 +52,9 @@ class Building(models.Model):
                                            default=0)
     description = models.TextField(blank=True, null=True, max_length=500)
 
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
 
 class PremiseMain(models.Model):
     id = models.BigAutoField(primary_key=True)

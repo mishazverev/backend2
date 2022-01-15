@@ -53,9 +53,58 @@ class RentContractViewSet(viewsets.ModelViewSet):
     serializer_class = RentContractSerializer
 
 
+class Building(viewsets.ModelViewSet):
+    queryset = Building.objects.all()
+    serializer_class = BuildingSerializer
+
+
+class AdditionalAgreementViewSet(viewsets.ModelViewSet):
+    queryset = AdditionalAgreement.objects.all()
+    serializer_class = AdditionalAgreementSerializer
+
+
+class RentContractPeriodicalFeeViewSet(viewsets.ModelViewSet):
+    queryset = RentContractPeriodicalFee.objects.all()
+    serializer_class = RentContractPeriodicalFeeSerializer
+
+
+class RentContractOneTimeFeeViewSet(viewsets.ModelViewSet):
+    queryset = RentContractOneTimeFee.objects.all()
+    serializer_class = RentContractOneTimeFeeSerializer
+
+
+class CounterViewSet(viewsets.ModelViewSet):
+    queryset = Counter.objects.all()
+    serializer_class = CounterSerializer
+
+
+class RentContractUtilityFeeViewSet(viewsets.ModelViewSet):
+    queryset = RentContractUtilityFee.objects.all()
+    serializer_class = RentContractUtilityFeeSerializer
+
+
+class RentContractSetupViewSet(viewsets.ModelViewSet):
+    queryset = RentContractSetup.objects.all()
+    serializer_class = RentContractSetupSerializer
+
+
+class RentContractPeriodicalFeeSetupViewSet(viewsets.ModelViewSet):
+    queryset = RentContractPeriodicalFeeSetup.objects.all()
+    serializer_class = RentContractPeriodicalFeeSetupSerializer
+
+
+class RentContractOneTimeFeeSetupViewSet(viewsets.ModelViewSet):
+    queryset = RentContractOneTimeFeeSetup.objects.all()
+    serializer_class = RentContractOneTimeFeeSetupSerializer
+
+
+class RentContractUtilityFeeSetupViewSet(viewsets.ModelViewSet):
+    queryset = RentContractUtilityFeeSetup.objects.all()
+    serializer_class = RentContractUtilityFeeSetupSerializer
+
+
 class BrandSearchFilter(ListAPIView):
     model = Brand
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
     word_fields = ('brand_name',)
-
