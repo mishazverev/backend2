@@ -311,7 +311,6 @@ class RentContractOneTimeFeeSerializer(serializers.ModelSerializer):
             'one_time_fee_total_payment',
             'one_time_fee_contract_payment_date',
             'one_time_fee_contract_triggering_event_related_payment_day',
-            'one_time_fee_contract_relative_payment_day',
             'last_updated',
             'user_updated',
         )
@@ -344,7 +343,7 @@ class RentContractUtilityFeeSerializer(serializers.ModelSerializer):
             'compensation_payment_period',
             'compensation_fixed_fee',
             'compensation_fixed_fee_indexation_type',
-            'compensation_fixed_indexation_fixed',
+            'compensation_fixed_fee_indexation_fixed',
             'compensation_advance_payment_day',
             'compensation_counter_data_providing_day',
             'compensation_post_payment_day',
@@ -437,7 +436,7 @@ class RentContractUtilityFeeSetupSerializer(serializers.ModelSerializer):
         model = RentContractUtilityFeeSetup
         fields = (
             'id',
-            'rent_contract_id',
+            'rent_contract_setup_id',
             'utility_name',
             'compensation_type'
             'compensation_calculation_period',
