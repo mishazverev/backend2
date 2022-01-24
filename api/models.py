@@ -44,7 +44,7 @@ class Brand(models.Model):
 
 class Building(models.Model):
     id = models.BigAutoField(primary_key=True)
-    building_name = models.TextField(blank=True, null=True, max_length=10)
+    building_name = models.TextField(blank=True, null=True, max_length=50)
     address_postal_index = models.TextField(blank=True, null=True, max_length=10)
     address_country = models.TextField(blank=True, null=True, max_length=50)
     address_city = models.TextField(blank=True, null=True, max_length=50)
