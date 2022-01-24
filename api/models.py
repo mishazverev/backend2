@@ -5,6 +5,26 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 from datetime import datetime
 
+class Building(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    building_name = models.CharField(max_length=50, blank=True, null=True, unique=True)
+    address_postal_index = models.TextField(blank=True, null=True, max_length=10)
+    address_country = models.CharField(blank=True, null=True, max_length=50)
+    address_city = models.CharField(blank=True, null=True, max_length=50)
+    address_street_number = models.CharField(blank=True, null=True, max_length=50)
+    number_of_floors = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
+                                           default=0)
+    description = models.TextField(blank=True, null=True, max_length=500)
+
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        ordering = ['building_name']
+
+    def __str__(self):
+        return self.building_name
+
 
 class BrandCategoryTag(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -25,7 +45,6 @@ class Brand(models.Model):
     brand_name = models.CharField(max_length=50, unique=True)
     brand_description = models.CharField(null=True, max_length=200, blank=True)
     brand_category_tag = models.ManyToManyField(BrandCategoryTag, null=True, blank=True)
-
     retail_premise_type = models.CharField(max_length=30, null=True, blank=True)
     needed_min_area = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
     needed_max_area = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
@@ -44,27 +63,6 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.brand_name
-
-
-class Building(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    building_name = models.CharField(max_length=50, blank=True, null=True, unique=True)
-    address_postal_index = models.TextField(blank=True, null=True, max_length=10)
-    address_country = models.CharField(blank=True, null=True, max_length=50)
-    address_city = models.CharField(blank=True, null=True, max_length=50)
-    address_street_number = models.CharField(blank=True, null=True, max_length=50)
-    number_of_floors = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
-                                           default=0)
-    description = models.TextField(blank=True, null=True, max_length=500)
-
-    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
-    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-
-    class Meta:
-        ordering = ['building_name']
-
-    def __str__(self):
-        return self.building_name
 
 
 class PremiseMain(models.Model):
@@ -127,7 +125,11 @@ class TenantContractor(models.Model):
 
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    class Meta:
+        ordering = ['company_name']
 
+    def __str__(self):
+        return self.company_name
 
 class TenantContractorContacts(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -141,6 +143,8 @@ class TenantContractorContacts(models.Model):
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
+    class Meta:
+        ordering = ['contact_person_name']
 
 class RentContract(models.Model):
     # --- Main and commercial terms ---
