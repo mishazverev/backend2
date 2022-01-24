@@ -10,6 +10,8 @@ class BrandCategoryTag(models.Model):
     id = models.BigAutoField(primary_key=True)
     category_tag_name = models.CharField(max_length=20, unique=True)
     category_tag_description = models.CharField(null=True, max_length=200)
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ['category_tag_name']
@@ -34,6 +36,8 @@ class Brand(models.Model):
     needed_cooling_capacity = models.DecimalField(null=True, max_digits=6, decimal_places=2, blank=True)
     needed_water_supply = models.BooleanField(default=False)
     needed_additional_requirements = models.TextField(blank=True, null=True, max_length=500)
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ['brand_name']
@@ -56,6 +60,11 @@ class Building(models.Model):
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
+    class Meta:
+        ordering = ['building_name']
+
+    def __str__(self):
+        return self.building_name
 
 class PremiseMain(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -128,6 +137,8 @@ class TenantContractorContacts(models.Model):
     contact_person_phone = models.CharField(max_length=100, null=True, blank=True)
     contact_person_mobile1 = models.CharField(max_length=100, null=True, blank=True)
     contact_person_mobile2 = models.CharField(max_length=100, null=True, blank=True)
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
 
 class RentContract(models.Model):
