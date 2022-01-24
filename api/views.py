@@ -21,9 +21,14 @@ def last_brand(request):
     return Response(serializer.data)
 
 
-class CategoryTagViewSet(viewsets.ModelViewSet):
-    queryset = CategoryTag.objects.all()
-    serializer_class = CategoryTagSerializer
+class BuildingViewSet(viewsets.ModelViewSet):
+    queryset = Building.objects.all()
+    serializer_class = BuildingSerializer
+
+
+class BrandCategoryTagViewSet(viewsets.ModelViewSet):
+    queryset = BrandCategoryTag.objects.all()
+    serializer_class = BrandCategoryTagSerializer
 
 
 class BrandViewSet(viewsets.ModelViewSet):
@@ -51,11 +56,6 @@ class TenantContractorContactsViewSet(viewsets.ModelViewSet):
 class RentContractViewSet(viewsets.ModelViewSet):
     queryset = RentContract.objects.all()
     serializer_class = RentContractSerializer
-
-
-class BuildingViewSet(viewsets.ModelViewSet):
-    queryset = Building.objects.all()
-    serializer_class = BuildingSerializer
 
 
 class AdditionalAgreementViewSet(viewsets.ModelViewSet):

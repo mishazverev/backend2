@@ -2,10 +2,12 @@ from rest_framework import serializers
 from .models import *
 
 
-class CategoryTagSerializer(serializers.ModelSerializer):
+class BrandCategoryTagSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CategoryTag
-        fields = ('id', 'category_tag_name', 'category_tag_description')
+        model = BrandCategoryTag
+        fields = ('id',
+                  'category_tag_name',
+                  'category_tag_description')
 
 
 class BrandSerializer(serializers.ModelSerializer):
@@ -22,6 +24,7 @@ class BuildingSerializer(serializers.ModelSerializer):
         model = Building
         fields = (
             'id',
+            'building_name',
             'address_postal_index',
             'address_country',
             'address_city',
@@ -273,7 +276,6 @@ class AdditionalAgreementSerializer(serializers.ModelSerializer):
         )
 
 
-
 class RentContractPeriodicalFeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = RentContractPeriodicalFee
@@ -338,7 +340,7 @@ class RentContractUtilityFeeSerializer(serializers.ModelSerializer):
             'rent_contract_additional_agreement_id',
             'utility_name',
             'compensation_type',
-            'counter_numbers',
+            'counter_id',
             'compensation_calculation_period',
             'compensation_payment_period',
             'compensation_fixed_fee',

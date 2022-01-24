@@ -6,7 +6,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from datetime import datetime
 
 
-class CategoryTag(models.Model):
+class BrandCategoryTag(models.Model):
     id = models.BigAutoField(primary_key=True)
     category_tag_name = models.CharField(max_length=20, unique=True)
     category_tag_description = models.CharField(null=True, max_length=200)
@@ -22,7 +22,7 @@ class Brand(models.Model):
     id = models.BigAutoField(primary_key=True)
     brand_name = models.CharField(max_length=50, unique=True)
     brand_description = models.CharField(null=True, max_length=200, blank=True)
-    brand_category_tag = models.ManyToManyField(CategoryTag, null=True, blank=True)
+    brand_category_tag = models.ManyToManyField(BrandCategoryTag, null=True, blank=True)
 
     retail_premise_type = models.CharField(max_length=30, null=True, blank=True)
     needed_min_area = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
@@ -44,6 +44,7 @@ class Brand(models.Model):
 
 class Building(models.Model):
     id = models.BigAutoField(primary_key=True)
+    building_name = models.TextField(blank=True, null=True, max_length=10)
     address_postal_index = models.TextField(blank=True, null=True, max_length=10)
     address_country = models.TextField(blank=True, null=True, max_length=50)
     address_city = models.TextField(blank=True, null=True, max_length=50)
@@ -794,7 +795,7 @@ class RentContractUtilityFee(models.Model):
         default=compensation_types.USING_COUNTER, )
 
     # IF BY COUNTERS ONLY
-    counter_numbers = models.ManyToManyField(Counter)
+    counter_id = models.ManyToManyField(Counter)
 
     # IF FIXED COMPENSATION ONLY - Period of fixed utility compensation payment (usually - one month)
     class compensation_calculation_period_types(models.TextChoices):
