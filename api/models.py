@@ -63,8 +63,8 @@ class Building(models.Model):
     class Meta:
         ordering = ['building_name']
 
-    def __str__(self):
-        return self.building_name
+    # def __str__(self):
+    #     return self.building_name
 
 
 class PremiseMain(models.Model):
