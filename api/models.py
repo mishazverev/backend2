@@ -63,8 +63,8 @@ class Building(models.Model):
     class Meta:
         ordering = ['building_name']
 
-    # def __str__(self):
-    #     return self.building_name
+    def __str__(self):
+        return self.building_name
 
 
 class PremiseMain(models.Model):
@@ -675,7 +675,6 @@ class RentContractPeriodicalFee(models.Model):
     class periodical_fee_calculation_methods(models.TextChoices):
         PER_SQM = 'Per_sqm'
         TOTAL = 'Total'
-        NON_INDEXABLE = 'Non_Indexable'
 
     periodical_fee_calculation_method = models.CharField(
         null=True,
@@ -724,7 +723,6 @@ class RentContractOneTimeFee(models.Model):
     class one_time_fee_calculation_methods(models.TextChoices):
         PER_SQM = 'Per_sqm'
         TOTAL = 'Total'
-        NON_INDEXABLE = 'Non_Indexable'
 
     one_time_fee_calculation_method = models.CharField(
         null=True,
@@ -879,7 +877,7 @@ class RentContractSetup(models.Model):
     # --- Main and commercial terms ---
 
     id = models.BigAutoField(primary_key=True)
-    building_id = models.ManyToManyField(Building)
+    building_id = models.ManyToManyField(Building, null=True, blank=True)
 
     # Rental Payment
 
@@ -910,6 +908,16 @@ class RentContractSetup(models.Model):
         max_length=20,
         choices=fixed_rent_payment_period_types.choices,
         default=fixed_rent_payment_period_types.MONTH, )
+
+    class fixed_rent_calculation_methods(models.TextChoices):
+        PER_SQM = 'Per_sqm'
+        TOTAL = 'Total'
+
+    fixed_rent_calculation_method = models.CharField(
+        null=True,
+        max_length=20,
+        choices=fixed_rent_calculation_methods.choices,
+        default=fixed_rent_calculation_methods.PER_SQM, )
 
     fixed_rent_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
     fixed_rent_total_payment = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
@@ -1042,7 +1050,6 @@ class RentContractPeriodicalFeeSetup(models.Model):
     class periodical_fee_calculation_methods(models.TextChoices):
         PER_SQM = 'Per_sqm'
         TOTAL = 'Total'
-        NON_INDEXABLE = 'Non_Indexable'
 
     periodical_fee_calculation_method = models.CharField(
         null=True,
@@ -1089,7 +1096,6 @@ class RentContractOneTimeFeeSetup(models.Model):
     class one_time_fee_calculation_methods(models.TextChoices):
         PER_SQM = 'Per_sqm'
         TOTAL = 'Total'
-        NON_INDEXABLE = 'Non_Indexable'
 
     one_time_fee_calculation_method = models.CharField(
         null=True,
