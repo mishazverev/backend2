@@ -5,9 +5,10 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 from datetime import datetime
 
+
 class Building(models.Model):
     id = models.BigAutoField(primary_key=True)
-    building_name = models.CharField(max_length=50, blank=True, null=True, unique=True)
+    building_name = models.CharField(max_length=50, unique=True)
     address_postal_index = models.TextField(blank=True, null=True, max_length=10)
     address_country = models.CharField(blank=True, null=True, max_length=50)
     address_city = models.CharField(blank=True, null=True, max_length=50)
@@ -89,6 +90,9 @@ class PremiseMain(models.Model):
     class Meta:
         ordering = ['number']
 
+    def __str__(self):
+        return self.number
+
 
 class TenantContractor(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -125,16 +129,18 @@ class TenantContractor(models.Model):
 
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
     class Meta:
         ordering = ['company_name']
 
     def __str__(self):
         return self.company_name
 
+
 class TenantContractorContacts(models.Model):
     id = models.BigAutoField(primary_key=True)
     tenant_contractor_id = models.ForeignKey(TenantContractor, on_delete=models.CASCADE, null=True, default='')
-    contact_person_name = models.CharField(max_length=100, null=True, blank=True)
+    contact_person_name = models.CharField(max_length=100)
     contact_person_position = models.CharField(max_length=100, null=True, blank=True)
     contact_person_email = models.EmailField(null=True, blank=True)
     contact_person_phone = models.CharField(max_length=100, null=True, blank=True)
@@ -145,6 +151,10 @@ class TenantContractorContacts(models.Model):
 
     class Meta:
         ordering = ['contact_person_name']
+
+    def __str__(self):
+        return self.contact_person_name
+
 
 class RentContract(models.Model):
     # --- Main and commercial terms ---
@@ -477,7 +487,7 @@ class AdditionalAgreement(models.Model):
     id = models.BigAutoField(primary_key=True)
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
 
-    additional_agreement_number = models.CharField(max_length=50, null=True, blank=True)
+    additional_agreement_number = models.CharField(max_length=50)
     additional_agreement_signing_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     additional_agreement_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
 
@@ -635,6 +645,12 @@ class AdditionalAgreement(models.Model):
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
+    class Meta:
+        ordering = ['additional_agreement_number']
+
+    def __str__(self):
+        return self.additional_agreement_number
+
 
 class RentContractPeriodicalFee(models.Model):
     # Is used for regular fixed fees (service fee, marketing fee, etc)
@@ -643,7 +659,7 @@ class RentContractPeriodicalFee(models.Model):
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
     rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
                                                               null=True, )
-    periodical_fee_name = models.CharField(max_length=100, null=True, blank=True)
+    periodical_fee_name = models.CharField(max_length=100)
 
     # Period of fee calculation
     class periodical_fee_calculation_period_types(models.TextChoices):
@@ -715,13 +731,19 @@ class RentContractPeriodicalFee(models.Model):
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
+    class Meta:
+        ordering = ['periodical_fee_name']
+
+    def __str__(self):
+        return self.periodical_fee_name
+
 
 class RentContractOneTimeFee(models.Model):
     id = models.BigAutoField(primary_key=True)
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
     rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
                                                               null=True, )
-    one_time_fee_name = models.CharField(max_length=100, null=True, blank=True)
+    one_time_fee_name = models.CharField(max_length=100)
 
     # The way how one-time fee is calculated
     class one_time_fee_calculation_methods(models.TextChoices):
@@ -773,6 +795,12 @@ class RentContractOneTimeFee(models.Model):
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
+    class Meta:
+        ordering = ['one_time_fee_name']
+
+    def __str__(self):
+        return self.one_time_fee_name
+
 
 class Counter(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -794,7 +822,7 @@ class RentContractUtilityFee(models.Model):
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
     rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
                                                               null=True, )
-    utility_name = models.CharField(max_length=100, null=True, blank=True)
+    utility_name = models.CharField(max_length=100)
 
     # usually -  USING COUNTER
     class compensation_types(models.TextChoices):
@@ -876,12 +904,18 @@ class RentContractUtilityFee(models.Model):
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
+    class Meta:
+        ordering = ['utility_name']
+
+    def __str__(self):
+        return self.utility_name
+
 
 class RentContractSetup(models.Model):
     # --- Main and commercial terms ---
 
     id = models.BigAutoField(primary_key=True)
-    building_id = models.ManyToManyField(Building, null=True, blank=True)
+    building_id = models.ManyToManyField(Building)
 
     # Rental Payment
 
@@ -1090,6 +1124,12 @@ class RentContractPeriodicalFeeSetup(models.Model):
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
+    class Meta:
+        ordering = ['periodical_fee_name']
+
+    def __str__(self):
+        return self.periodical_fee_name
+
 
 class RentContractOneTimeFeeSetup(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -1144,6 +1184,12 @@ class RentContractOneTimeFeeSetup(models.Model):
                                                                                      default=0)
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        ordering = ['one_time_fee_name']
+
+    def __str__(self):
+        return self.one_time_fee_name
 
 
 class RentContractUtilityFeeSetup(models.Model):
@@ -1227,3 +1273,9 @@ class RentContractUtilityFeeSetup(models.Model):
                                                         default=0)
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        ordering = ['utility_name']
+
+    def __str__(self):
+        return self.utility_name
