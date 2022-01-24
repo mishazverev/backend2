@@ -7,7 +7,10 @@ class BrandCategoryTagSerializer(serializers.ModelSerializer):
         model = BrandCategoryTag
         fields = ('id',
                   'category_tag_name',
-                  'category_tag_description')
+                  'category_tag_description',
+                  'last_updated',
+                  'user_updated'
+                  )
 
 
 class BrandSerializer(serializers.ModelSerializer):
@@ -16,7 +19,7 @@ class BrandSerializer(serializers.ModelSerializer):
         fields = ('id', 'brand_name', 'brand_description', 'brand_category_tag', 'retail_premise_type',
                   'needed_min_area', 'needed_max_area', 'needed_ceiling_height', 'needed_facade_length',
                   'needed_fitout_condition', 'needed_electric_capacity', 'needed_cooling_capacity',
-                  'needed_water_supply', 'needed_additional_requirements')
+                  'needed_water_supply', 'needed_additional_requirements', 'last_updated', 'user_updated')
 
 
 class BuildingSerializer(serializers.ModelSerializer):
@@ -114,6 +117,8 @@ class TenantContractorContactsSerializer(serializers.ModelSerializer):
             'contact_person_phone',
             'contact_person_mobile1',
             'contact_person_mobile2',
+            'last_updated',
+            'user_updated'
         )
 
 
