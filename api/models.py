@@ -48,11 +48,11 @@ class Brand(models.Model):
 
 class Building(models.Model):
     id = models.BigAutoField(primary_key=True)
-    building_name = models.TextField(blank=True, null=True, max_length=50)
+    building_name = models.CharField(max_length=50, blank=True, null=True, unique=True)
     address_postal_index = models.TextField(blank=True, null=True, max_length=10)
-    address_country = models.TextField(blank=True, null=True, max_length=50)
-    address_city = models.TextField(blank=True, null=True, max_length=50)
-    address_street_number = models.TextField(blank=True, null=True, max_length=50)
+    address_country = models.CharField(blank=True, null=True, max_length=50)
+    address_city = models.CharField(blank=True, null=True, max_length=50)
+    address_street_number = models.CharField(blank=True, null=True, max_length=50)
     number_of_floors = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
                                            default=0)
     description = models.TextField(blank=True, null=True, max_length=500)
@@ -65,6 +65,7 @@ class Building(models.Model):
 
     def __str__(self):
         return self.building_name
+
 
 class PremiseMain(models.Model):
     id = models.BigAutoField(primary_key=True)
