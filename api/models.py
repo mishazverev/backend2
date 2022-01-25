@@ -658,7 +658,7 @@ class RentContractPeriodicalFee(models.Model):
     id = models.BigAutoField(primary_key=True)
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
     rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
-                                                              null=True, )
+                                                              null=True, default='')
     periodical_fee_name = models.CharField(max_length=100)
 
     # Period of fee calculation
@@ -742,7 +742,7 @@ class RentContractOneTimeFee(models.Model):
     id = models.BigAutoField(primary_key=True)
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
     rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
-                                                              null=True, )
+                                                              null=True, default='')
     one_time_fee_name = models.CharField(max_length=100)
 
     # The way how one-time fee is calculated
@@ -821,7 +821,7 @@ class RentContractUtilityFee(models.Model):
     id = models.BigAutoField(primary_key=True)
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
     rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
-                                                              null=True, )
+                                                              null=True, default='')
     utility_name = models.CharField(max_length=100)
 
     # usually -  USING COUNTER
