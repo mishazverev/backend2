@@ -86,6 +86,8 @@ class RentContractUtilityFeeViewSet(viewsets.ModelViewSet):
 class RentContractSetupViewSet(viewsets.ModelViewSet):
     queryset = RentContractSetup.objects.all()
     serializer_class = RentContractSetupSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['building_id']
 
 
 class RentContractPeriodicalFeeSetupViewSet(viewsets.ModelViewSet):
