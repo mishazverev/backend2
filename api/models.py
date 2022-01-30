@@ -918,6 +918,7 @@ class RentContractSetup(models.Model):
     building_id = models.ManyToManyField(Building)
 
     # Rental Payment
+    fixed_rent_name = models.CharField(max_length=100, null=True, blank=True)
 
     class fixed_rent_calculation_period_types(models.TextChoices):
         DAY = 'Day'

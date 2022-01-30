@@ -366,6 +366,7 @@ class RentContractSetupSerializer(serializers.ModelSerializer):
             'id',
             'building_id',
 
+            'fixed_rent_name',
             'fixed_rent_calculation_period',
             'fixed_rent_payment_period',
 
