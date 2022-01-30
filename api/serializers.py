@@ -367,8 +367,10 @@ class RentContractSetupSerializer(serializers.ModelSerializer):
             'building_id',
 
             'fixed_rent_name',
+
             'fixed_rent_calculation_period',
             'fixed_rent_payment_period',
+            'fixed_rent_calculation_object',
 
             'fixed_rent_per_sqm',
             'fixed_rent_total_payment',
