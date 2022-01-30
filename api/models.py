@@ -971,6 +971,16 @@ class RentContractSetup(models.Model):
     fixed_rent_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
     fixed_rent_total_payment = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
 
+    class fixed_rent_prepayment_or_postpayment_types(models.TextChoices):
+        PREPAYMENT = 'Prepayment'
+        POSTPAYMENT = 'Postpayment'
+
+    fixed_rent_prepayment_or_postpayment = models.CharField(
+        null=True,
+        max_length=20,
+        choices=fixed_rent_prepayment_or_postpayment_types.choices,
+        default=fixed_rent_prepayment_or_postpayment_types.PREPAYMENT, )
+
     # In relevance with fixed_rent_payment_period - previous period day
     fixed_rent_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
                                                          default=0)
