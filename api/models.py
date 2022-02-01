@@ -1004,6 +1004,7 @@ class RentContractSetup(models.Model):
                                                       decimal_places=2, default=0)
     # Turnover fee
 
+    turnover_fee_is_applicable = models.BooleanField(default=True)
     turnover_fee = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
 
     class turnover_fee_periods(models.TextChoices):
@@ -1023,6 +1024,8 @@ class RentContractSetup(models.Model):
     turnover_fee_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
 
     # --- Utilities compensation - Common area (CA) ---
+
+    CA_utilities_compensation_is_applicable = models.BooleanField(default=True)
 
     class CA_utilities_compensation_types(models.TextChoices):
         FIXED = 'Fixed'

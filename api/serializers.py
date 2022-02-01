@@ -380,11 +380,13 @@ class RentContractSetupSerializer(serializers.ModelSerializer):
             'fixed_rent_indexation_type',
             'fixed_rent_indexation_fixed',
 
+            'turnover_fee_is_applicable',
             'turnover_fee',
             'turnover_fee_period',
             'turnover_data_providing_day',
             'turnover_fee_payment_day',
 
+            'CA_utilities_compensation_is_applicable',
             'CA_utilities_compensation_type',
             'CA_utilities_compensation_fixed_indexation_type',
 
