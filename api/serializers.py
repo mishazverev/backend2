@@ -392,7 +392,10 @@ class RentContractSetupSerializer(serializers.ModelSerializer):
 
             'CA_utilities_compensation_fee_fixed',
             'CA_utilities_compensation_fee_fixed_indexation_type_fixed',
-            'CA_utilities_compensation_fee_payment_day',
+
+            'CA_utilities_compensation_fee_prepayment_or_postpayment',
+            'CA_utilities_compensation_fee_advance_payment_day',
+            'CA_utilities_compensation_fee_post_payment_day',
 
             'guarantee_deposit_required',
             'guarantee_deposit_coverage_number_of_periods',

@@ -1057,8 +1057,22 @@ class RentContractSetup(models.Model):
                                                                                     decimal_places=2,
                                                                                     default=0)
 
-    CA_utilities_compensation_fee_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
-                                                                    decimal_places=0, default=0)
+    class CA_utilities_compensation_fee_prepayment_or_postpayment_types(models.TextChoices):
+        PREPAYMENT = 'Prepayment'
+        POSTPAYMENT = 'Postpayment'
+
+    CA_utilities_compensation_fee_prepayment_or_postpayment = models.CharField(
+        null=True,
+        max_length=20,
+        choices=CA_utilities_compensation_fee_prepayment_or_postpayment_types.choices,
+        default=CA_utilities_compensation_fee_prepayment_or_postpayment_types.PREPAYMENT, )
+
+    CA_utilities_compensation_fee_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
+                                                                            decimal_places=0,
+                                                                            default=0)
+    CA_utilities_compensation_fee_post_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
+                                                                         decimal_places=0,
+                                                                         default=0)
 
     # --- Guarantee deposit
     guarantee_deposit_required = models.BooleanField(default=True)
