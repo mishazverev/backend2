@@ -1127,6 +1127,16 @@ class RentContractPeriodicalFeeSetup(models.Model):
     periodical_fee_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
     periodical_fee_total_payment = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
 
+    class periodical_fee_prepayment_or_postpayment_types(models.TextChoices):
+        PREPAYMENT = 'Prepayment'
+        POSTPAYMENT = 'Postpayment'
+
+    periodical_fee_prepayment_or_postpayment = models.CharField(
+        null=True,
+        max_length=20,
+        choices=periodical_fee_prepayment_or_postpayment_types.choices,
+        default=periodical_fee_prepayment_or_postpayment_types.PREPAYMENT, )
+
     # In relevance with periodical_fee_payment_period - previous period day
     periodical_fee_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
                                                              default=0)
@@ -1288,6 +1298,18 @@ class RentContractUtilityFeeSetup(models.Model):
     # IF FIXED COMPENSATION ONLY - annual indexation % of fixed utility compensation
     compensation_fixed_fee_indexation_fixed = models.DecimalField(null=True, max_digits=4,
                                                                   decimal_places=2, default=0)
+
+    class compensation_fixed_fee_prepayment_or_postpayment_types(models.TextChoices):
+        PREPAYMENT = 'Prepayment'
+        POSTPAYMENT = 'Postpayment'
+
+    compensation_fixed_fee_prepayment_or_postpayment = models.CharField(
+        null=True,
+        max_length=20,
+        choices=compensation_fixed_fee_prepayment_or_postpayment_types.choices,
+        default=compensation_fixed_fee_prepayment_or_postpayment_types.PREPAYMENT, )
+
+
     # IF FIXED COMPENSATION ONLY - In relevance with compensation_payment_period_types - previous period day
     compensation_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
                                                            decimal_places=0,
