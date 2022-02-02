@@ -920,16 +920,6 @@ class RentContractSetup(models.Model):
     # Rental Payment
     fixed_rent_name = models.CharField(max_length=100, null=True, blank=True)
 
-    class fixed_rent_calculation_object_types(models.TextChoices):
-        PER_SQM = 'Per_sqm'
-        TOTAL = 'Total'
-
-    fixed_rent_calculation_object = models.CharField(
-        null=True,
-        max_length=20,
-        choices=fixed_rent_calculation_object_types.choices,
-        default=fixed_rent_calculation_object_types.PER_SQM, )
-
     class fixed_rent_calculation_period_types(models.TextChoices):
         DAY = 'Day'
         WEEK = 'Week'

@@ -370,10 +370,11 @@ class RentContractSetupSerializer(serializers.ModelSerializer):
 
             'fixed_rent_calculation_period',
             'fixed_rent_payment_period',
-            'fixed_rent_calculation_object',
 
+            'fixed_rent_calculation_method',
             'fixed_rent_per_sqm',
             'fixed_rent_total_payment',
+
             'fixed_rent_prepayment_or_postpayment',
             'fixed_rent_advance_payment_day',
             'fixed_rent_post_payment_day',
