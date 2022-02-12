@@ -915,7 +915,7 @@ class RentContractSetup(models.Model):
     # --- Main and commercial terms ---
 
     id = models.BigAutoField(primary_key=True)
-    building_id = models.ManyToManyField(Building)
+    building_id = models.ForeignKey(Building, on_delete=models.CASCADE, null=True, default='')
 
     # Rental Payment
     fixed_rent_name = models.CharField(max_length=100, null=True, blank=True)
