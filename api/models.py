@@ -930,6 +930,7 @@ class RentContractSetup(models.Model):
 
     fixed_rent_calculation_period = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=fixed_rent_calculation_period_types.choices,
         default=fixed_rent_calculation_period_types.MONTH, )
@@ -944,6 +945,7 @@ class RentContractSetup(models.Model):
 
     fixed_rent_payment_period = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=fixed_rent_payment_period_types.choices,
         default=fixed_rent_payment_period_types.MONTH, )
@@ -954,6 +956,7 @@ class RentContractSetup(models.Model):
 
     fixed_rent_calculation_method = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=fixed_rent_calculation_methods.choices,
         default=fixed_rent_calculation_methods.PER_SQM, )
@@ -967,6 +970,7 @@ class RentContractSetup(models.Model):
 
     fixed_rent_prepayment_or_postpayment = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=fixed_rent_prepayment_or_postpayment_types.choices,
         default=fixed_rent_prepayment_or_postpayment_types.PREPAYMENT, )
@@ -986,6 +990,7 @@ class RentContractSetup(models.Model):
 
     fixed_rent_indexation_type = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=fixed_rent_indexation_types.choices,
         default=fixed_rent_indexation_types.FIXED, )
@@ -1096,6 +1101,7 @@ class RentContractPeriodicalFeeSetup(models.Model):
 
     periodical_fee_calculation_period = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=periodical_fee_calculation_period_types.choices,
         default=periodical_fee_calculation_period_types.MONTH, )
@@ -1111,6 +1117,7 @@ class RentContractPeriodicalFeeSetup(models.Model):
 
     periodical_fee_payment_period = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=periodical_fee_payment_period_types.choices,
         default=periodical_fee_payment_period_types.MONTH, )
@@ -1122,6 +1129,7 @@ class RentContractPeriodicalFeeSetup(models.Model):
 
     periodical_fee_calculation_method = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=periodical_fee_calculation_methods.choices,
         default=periodical_fee_calculation_methods.PER_SQM, )
@@ -1136,6 +1144,7 @@ class RentContractPeriodicalFeeSetup(models.Model):
 
     periodical_fee_prepayment_or_postpayment = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=periodical_fee_prepayment_or_postpayment_types.choices,
         default=periodical_fee_prepayment_or_postpayment_types.PREPAYMENT, )
@@ -1156,6 +1165,7 @@ class RentContractPeriodicalFeeSetup(models.Model):
 
     periodical_fee_indexation_type = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=periodical_fee_indexation_types.choices,
         default=periodical_fee_indexation_types.FIXED, )
@@ -1184,6 +1194,7 @@ class RentContractOneTimeFeeSetup(models.Model):
 
     one_time_fee_calculation_method = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=one_time_fee_calculation_methods.choices,
         default=one_time_fee_calculation_methods.PER_SQM, )
@@ -1197,6 +1208,7 @@ class RentContractOneTimeFeeSetup(models.Model):
 
     one_time_fee_payment_term = models.CharField(
         null=True,
+        blank=True,
         max_length=50,
         choices=one_time_fee_payment_terms.choices,
         default=one_time_fee_payment_terms.FIXED_DATE, )
@@ -1209,6 +1221,7 @@ class RentContractOneTimeFeeSetup(models.Model):
 
     one_time_fee_payment_triggering_event = models.CharField(
         null=True,
+        blank=True,
         max_length=50,
         choices=one_time_fee_payment_triggering_events.choices,
         default=one_time_fee_payment_triggering_events.ACT_OF_TRANSFER_DATE, )
@@ -1246,6 +1259,7 @@ class RentContractUtilityFeeSetup(models.Model):
 
     compensation_type = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=compensation_types.choices,
         default=compensation_types.USING_COUNTER, )
@@ -1262,6 +1276,7 @@ class RentContractUtilityFeeSetup(models.Model):
     # IF FIXED COMPENSATION ONLY - Period of fixed utility compensation payment (usually - one month)
     compensation_calculation_period = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=compensation_calculation_period_types.choices,
         default=compensation_calculation_period_types.MONTH, )
@@ -1278,6 +1293,7 @@ class RentContractUtilityFeeSetup(models.Model):
     # BOTH USING COUNTER and FIXED Period of utility compensation payment (usually - one month)
     compensation_payment_period = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=compensation_payment_period_types.choices,
         default=compensation_payment_period_types.MONTH, )
@@ -1295,6 +1311,7 @@ class RentContractUtilityFeeSetup(models.Model):
     # IF FIXED COMPENSATION ONLY - indexation type of fixed utility compensation
     compensation_fixed_fee_indexation_type = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=compensation_fixed_fee_indexation_types.choices,
         default=compensation_fixed_fee_indexation_types.FIXED, )
@@ -1308,6 +1325,7 @@ class RentContractUtilityFeeSetup(models.Model):
 
     compensation_fixed_fee_prepayment_or_postpayment = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=compensation_fixed_fee_prepayment_or_postpayment_types.choices,
         default=compensation_fixed_fee_prepayment_or_postpayment_types.PREPAYMENT, )
