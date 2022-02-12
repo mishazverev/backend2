@@ -998,10 +998,10 @@ class RentContractSetup(models.Model):
     turnover_fee = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
 
     class turnover_fee_periods(models.TextChoices):
-        MONTH1 = '1_month'
+        MONTH1 = 'Month'
         MONTH3 = '3_months'
         MONTH6 = '6_months'
-        MONTH12 = '12_months'
+        MONTH12 = 'Year'
 
     turnover_fee_period = models.CharField(
         null=True,
