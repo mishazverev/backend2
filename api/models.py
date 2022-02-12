@@ -1025,6 +1025,7 @@ class RentContractSetup(models.Model):
 
     CA_utilities_compensation_type = models.CharField(
         null=True,
+        blank=True,
         max_length=50,
         choices=CA_utilities_compensation_types.choices,
         default=CA_utilities_compensation_types.PROPORTIONAL_GLA, )
@@ -1037,6 +1038,7 @@ class RentContractSetup(models.Model):
 
     CA_utilities_compensation_fixed_indexation_type = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=CA_utilities_compensation_fixed_indexation_types.choices,
         default=CA_utilities_compensation_fixed_indexation_types.FIXED, )
@@ -1053,6 +1055,7 @@ class RentContractSetup(models.Model):
 
     CA_utilities_compensation_fee_prepayment_or_postpayment = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=CA_utilities_compensation_fee_prepayment_or_postpayment_types.choices,
         default=CA_utilities_compensation_fee_prepayment_or_postpayment_types.PREPAYMENT, )
