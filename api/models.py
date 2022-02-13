@@ -1025,7 +1025,7 @@ class RentContractSetup(models.Model):
     class CA_utilities_compensation_types(models.TextChoices):
         FIXED = 'Fixed'
         PROPORTIONAL_GLA = 'Proportional_to_GLA'
-        PROPORTIONAL_LEASED = 'Proportional_to_leased area'
+        PROPORTIONAL_LEASED = 'Proportional_to_leased_area'
         NONE = 'None'
 
     CA_utilities_compensation_type = models.CharField(
