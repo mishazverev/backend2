@@ -127,93 +127,64 @@ class RentContractSerializer(serializers.ModelSerializer):
         model = RentContract
         fields = (
             'id',
-            'rent_contract_number',
-            'contract_signing_date',
-            'contract_expiration_date',
 
+            'rent_contract_number',
+            'rent_contract_signing_date',
+            'rent_contract_expiration_date',
+
+            'building_id',
             'premise_id',
             'contracted_area',
             'tenant_contractor_id',
             'brand',
 
-            'rent_fee_per_sqm',
-            'rent_fee_indexation_type',
-            'rent_fee_indexation_fixed',
-            'rent_fee_advance_payment_day',
+            'act_of_transfer_date',
+            'rent_start_date',
+            'premise_return_date',
+            'stop_billing_date',
 
+            'fixed_rent_name',
+            'fixed_rent_calculation_period',
+            'fixed_rent_payment_period',
+            'fixed_rent_calculation_method',
+
+            'fixed_rent_per_sqm',
+            'fixed_rent_total_payment',
+            'fixed_rent_prepayment_or_postpayment',
+
+            'fixed_rent_advance_payment_day',
+            'fixed_rent_post_payment_day',
+            'fixed_rent_indexation_type',
+            'fixed_rent_indexation_fixed',
+
+            'turnover_fee_is_applicable',
             'turnover_fee',
             'turnover_fee_period',
             'turnover_data_providing_day',
             'turnover_fee_payment_day',
 
-            'service_fee_per_sqm',
-            'service_fee_indexation_type',
-            'service_fee_indexation_fixed',
-            'service_fee_advance_payment_day',
-
-            'marketing_fee_per_sqm',
-            'marketing_fee_indexation_type',
-            'marketing_fee_indexation_fixed',
-            'marketing_fee_advance_payment_day',
-
-            'rent_start_date',
-            'stop_billing_date',
-
-            'act_of_transfer_date',
-            'premise_return_date',
-
-            # 'duration_years',
-            # 'duration_months',
-            # 'duration_days',
-
-            'utilities_electricity_compensation_type',
-            'utilities_electricity_counter_number',
-            'utilities_electricity_compensation_fixed_fee',
-            'utilities_electricity_compensation_fixed_indexation_type',
-            'utilities_electricity_compensation_fixed_indexation_fixed',
-            'utilities_electricity_compensation_payment_day',
-
-            'utilities_cold_water_compensation_type',
-            'utilities_cold_water_counter_number',
-            'utilities_cold_water_compensation_fixed_fee',
-            'utilities_cold_water_compensation_fixed_indexation_type',
-            'utilities_cold_water_compensation_fixed_indexation_fixed',
-            'utilities_cold_water_compensation_payment_day',
-
-            'utilities_hot_water_compensation_type',
-            'utilities_hot_water_counter_number',
-            'utilities_hot_water_compensation_fixed_fee',
-            'utilities_hot_water_compensation_fixed_indexation_type',
-            'utilities_hot_water_compensation_fixed_indexation_fixed',
-            'utilities_hot_water_compensation_payment_day',
-
-            'utilities_gas_compensation_type',
-            'utilities_gas_counter_number',
-            'utilities_gas_compensation_fixed_fee',
-            'utilities_gas_compensation_fixed_indexation_type',
-            'utilities_gas_compensation_fixed_indexation_fixed',
-            'utilities_gas_compensation_payment_day',
-
+            'CA_utilities_compensation_is_applicable',
             'CA_utilities_compensation_type',
-            'CA_utilities_compensation_fee_payment_day',
-            'CA_utilities_compensation_fee_fixed',
+
             'CA_utilities_compensation_fixed_indexation_type',
+            'CA_utilities_compensation_fee_fixed',
             'CA_utilities_compensation_fee_fixed_indexation_type_fixed',
 
+            'CA_utilities_compensation_fee_prepayment_or_postpayment',
+            'CA_utilities_compensation_fee_advance_payment_day',
+            'CA_utilities_compensation_fee_post_payment_day',
+
+            'guarantee_deposit_required',
+            'guarantee_deposit_coverage_number_of_periods',
             'guarantee_deposit_type',
             'guarantee_deposit_amount',
-            'guarantee_deposit_provided',
             'guarantee_deposit_contract_providing_date',
+            'guarantee_deposit_actual_providing_date',
             'guarantee_bank_guarantee_expiration_date',
-
-            # 'advance_payment_required',
-            # 'advance_payment_paid',
-            # 'advance_payment_amount',
-            # 'advance_payment_contract_providing_date',
 
             'insurance_required',
             'insurance_contract_providing_date',
-            'insurance_provided',
+            'insurance_actual_providing_date',
             'insurance_expiration_date',
 
             'last_updated',
