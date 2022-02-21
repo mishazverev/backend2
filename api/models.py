@@ -548,7 +548,7 @@ class RentContractPeriodicalFee(models.Model):
     id = models.BigAutoField(primary_key=True)
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
     rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
-                                                              null=True, default='')
+                                                              null=True, blank=True, default='')
     periodical_fee_name = models.CharField(max_length=100)
 
     # Period of fee calculation
@@ -632,7 +632,7 @@ class RentContractOneTimeFee(models.Model):
     id = models.BigAutoField(primary_key=True)
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
     rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
-                                                              null=True, default='')
+                                                              null=True, blank=True, default='')
     one_time_fee_name = models.CharField(max_length=100)
 
     # The way how one-time fee is calculated
@@ -710,7 +710,7 @@ class Counter(models.Model):
 class RentContractUtilityFee(models.Model):
     id = models.BigAutoField(primary_key=True)
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
-    rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
+    rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE, blank=True,
                                                               null=True, default='')
     utility_name = models.CharField(max_length=100)
 
@@ -727,7 +727,8 @@ class RentContractUtilityFee(models.Model):
         default=compensation_types.USING_COUNTER, )
 
     # IF BY COUNTERS ONLY
-    counter_id = models.ManyToManyField(Counter)
+    counter_id = models.ForeignKey(Counter, on_delete=models.DO_NOTHING, blank=True,
+                                          null=True, default='')
 
     # IF FIXED COMPENSATION ONLY - Period of fixed utility compensation payment (usually - one month)
     class compensation_calculation_period_types(models.TextChoices):
@@ -1218,7 +1219,6 @@ class RentContractUtilityFeeSetup(models.Model):
         max_length=20,
         choices=compensation_fixed_fee_prepayment_or_postpayment_types.choices,
         default=compensation_fixed_fee_prepayment_or_postpayment_types.PREPAYMENT, )
-
 
     # IF FIXED COMPENSATION ONLY - In relevance with compensation_payment_period_types - previous period day
     compensation_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
