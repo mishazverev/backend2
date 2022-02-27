@@ -729,13 +729,17 @@ class Counter(models.Model):
 class RentContractUtilityFee(models.Model):
     id = models.BigAutoField(primary_key=True)
     rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
-    rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE, blank=True,
-                                                              null=True, default='')
+    rent_contract_additional_agreement_id = models.ForeignKey(
+        AdditionalAgreement,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        default='')
     utility_name = models.CharField(max_length=100)
 
     # usually -  USING COUNTER
     class compensation_types(models.TextChoices):
-        USING_COUNTER = 'Using counter'
+        USING_COUNTER = 'Using_counter'
         FIXED = 'Fixed'
         NONE = 'None'
 
@@ -801,6 +805,7 @@ class RentContractUtilityFee(models.Model):
         max_length=20,
         choices=compensation_fixed_fee_indexation_types.choices,
         default=compensation_fixed_fee_indexation_types.FIXED, )
+
     # IF FIXED COMPENSATION ONLY - annual indexation % of fixed utility compensation
     compensation_fixed_fee_indexation_fixed = models.DecimalField(null=True, max_digits=4,
                                                                   decimal_places=2, default=0)
