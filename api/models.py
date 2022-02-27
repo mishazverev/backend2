@@ -264,17 +264,19 @@ class RentContract(models.Model):
     turnover_fee = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
 
     class turnover_fee_periods(models.TextChoices):
-        MONTH1 = '1_month'
-        MONTH3 = '3_months'
-        MONTH6 = '6_months'
-        MONTH12 = '12_months'
+        DAY = 'Day'
+        WEEK = 'Week'
+        MONTH = 'Month'
+        MONTHS3 = '3_months'
+        MONTHS6 = '6_months'
+        YEAR = 'Year'
 
     turnover_fee_period = models.CharField(
         null=True,
         blank=True,
         max_length=20,
         choices=turnover_fee_periods.choices,
-        default=turnover_fee_periods.MONTH1, )
+        default=turnover_fee_periods.MONTH, )
 
     turnover_data_providing_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
     turnover_fee_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
@@ -285,7 +287,7 @@ class RentContract(models.Model):
     class CA_utilities_compensation_types(models.TextChoices):
         FIXED = 'Fixed'
         PROPORTIONAL_GLA = 'Proportional_to_GLA'
-        PROPORTIONAL_LEASED = 'Proportional_to_leased area'
+        PROPORTIONAL_LEASED = 'Proportional_to_leased_area'
         NONE = 'None'
 
     CA_utilities_compensation_type = models.CharField(
@@ -338,8 +340,8 @@ class RentContract(models.Model):
 
     class guarantee_deposit_types(models.TextChoices):
         CASH = 'Cash'
-        BANK_GUARANTEE = 'Bank guarantee'
-        CORPORATE_GUARANTEE = 'Corporate guarantee'
+        BANK_GUARANTEE = 'Bank_guarantee'
+        CORPORATE_GUARANTEE = 'Corporate_guarantee'
 
     guarantee_deposit_type = models.CharField(
         null=True,
