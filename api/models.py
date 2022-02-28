@@ -751,8 +751,8 @@ class RentContractUtilityFee(models.Model):
         default=compensation_types.USING_COUNTER, )
 
     # IF BY COUNTERS ONLY
-    counter_id = models.ForeignKey(Counter, on_delete=models.DO_NOTHING, blank=True,
-                                          null=True, default='')
+    # counter_id = models.ForeignKey(Counter, on_delete=models.DO_NOTHING, blank=True,
+    #                                       null=True, default='')
 
     # IF FIXED COMPENSATION ONLY - Period of fixed utility compensation payment (usually - one month)
     class compensation_calculation_period_types(models.TextChoices):

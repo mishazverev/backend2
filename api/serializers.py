@@ -317,7 +317,7 @@ class RentContractUtilityFeeSerializer(serializers.ModelSerializer):
             'rent_contract_additional_agreement_id',
             'utility_name',
             'compensation_type',
-            'counter_id',
+            # 'counter_id',
             'compensation_calculation_period',
             'compensation_payment_period',
             'compensation_fixed_fee',
