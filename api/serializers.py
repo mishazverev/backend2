@@ -60,6 +60,7 @@ class PremiseMainSerializer(serializers.ModelSerializer):
             'electric_capacity',
             'cooling_capacity',
             'water_supply',
+            # 'counter_id',
             'last_updated',
             'user_updated'
         )

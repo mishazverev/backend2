@@ -27,6 +27,21 @@ class Building(models.Model):
         return self.building_name
 
 
+class Counter(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    counter_number = models.CharField(max_length=50, unique=True)
+    counter_utility_type = models.CharField(max_length=50, unique=True)
+    counter_description = models.CharField(null=True, max_length=200, blank=True)
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        ordering = ['counter_number']
+
+    def __str__(self):
+        return self.counter_number
+
+
 class BrandCategoryTag(models.Model):
     id = models.BigAutoField(primary_key=True)
     category_tag_name = models.CharField(max_length=20, unique=True)
@@ -83,6 +98,9 @@ class PremiseMain(models.Model):
     electric_capacity = models.DecimalField(null=True, max_digits=6, decimal_places=2)
     cooling_capacity = models.DecimalField(null=True, max_digits=6, decimal_places=2)
     water_supply = models.BooleanField(default=False)
+    # UTILITIES COUNTERS
+    # counter_id = models.ForeignKey(Counter, on_delete=models.DO_NOTHING, blank=True,
+    #                                null=True, default='')
 
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
@@ -697,7 +715,7 @@ class RentContractOneTimeFee(models.Model):
     # One-time fee payment dated
     one_time_fee_contract_payment_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     one_time_fee_contract_triggering_event_related_payment_day = models.DecimalField(null=True, blank=True,
-                                                                                     max_digits=2,
+                                                                                     max_digits=4,
                                                                                      decimal_places=0,
                                                                                      default=0)
 
@@ -709,21 +727,6 @@ class RentContractOneTimeFee(models.Model):
 
     def __str__(self):
         return self.one_time_fee_name
-
-
-class Counter(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    counter_number = models.CharField(max_length=50, unique=True)
-    counter_utility_type = models.CharField(max_length=50, unique=True)
-    counter_description = models.CharField(null=True, max_length=200, blank=True)
-    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
-    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-
-    class Meta:
-        ordering = ['counter_number']
-
-    def __str__(self):
-        return self.counter_number
 
 
 class RentContractUtilityFee(models.Model):
