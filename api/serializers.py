@@ -443,3 +443,17 @@ class RentContractUtilityFeeSetupSerializer(serializers.ModelSerializer):
             'last_updated',
             'user_updated',
         )
+
+
+class StepPeriodicPaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StepPeriodicPayment
+        fields = (
+            'id',
+            'start_date',
+            'expiration_date',
+            'payment_amount',
+            'payment_calculation_method',
+            'last_updated',
+            'user_updated',
+        )

@@ -124,3 +124,8 @@ class BrandSearchFilter(ListAPIView):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
     word_fields = ('brand_name',)
+
+
+class StepPeriodicPaymentViewSet(viewsets.ModelViewSet):
+    queryset = StepPeriodicPayment.objects.all()
+    serializer_class = StepPeriodicPaymentSerializer
