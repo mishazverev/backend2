@@ -1286,7 +1286,6 @@ class RentContractUtilityFeeSetup(models.Model):
 
 class StepPeriodicPayment(models.Model):
     id = models.BigAutoField(primary_key=True)
-
     start_date: models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
     expiration_date: models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
     payment_amount: models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
@@ -1305,8 +1304,3 @@ class StepPeriodicPayment(models.Model):
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
-    class Meta:
-        ordering = ['id']
-
-    def __str__(self):
-        return self.id
