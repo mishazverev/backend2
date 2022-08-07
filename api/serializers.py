@@ -472,7 +472,7 @@ class PeriodicalFeeStepSerializer(serializers.ModelSerializer):
             'start_date',
             'expiration_date',
             'periodical_fee_amount',
-            'periodical_fee_payment_period',
+            'periodical_fee_calculation_period',
             'periodical_fee_calculation_method',
             'last_updated',
             'user_updated',

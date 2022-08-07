@@ -1332,7 +1332,7 @@ class PeriodicalFeeStep(models.Model):
     expiration_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
     periodical_fee_amount = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
 
-    class periodical_fee_payment_period_types(models.TextChoices):
+    class periodical_fee_calculation_period_types(models.TextChoices):
         DAY = 'Day'
         WEEK = 'Week'
         MONTH = 'Month'
@@ -1340,12 +1340,12 @@ class PeriodicalFeeStep(models.Model):
         MONTHS6 = '6_months'
         YEAR = 'Year'
 
-    periodical_fee_payment_period = models.CharField(
+    periodical_fee_calculation_period = models.CharField(
         null=True,
         blank=True,
         max_length=20,
-        choices=periodical_fee_payment_period_types.choices,
-        default=periodical_fee_payment_period_types.MONTH, )
+        choices=periodical_fee_calculation_period_types.choices,
+        default=periodical_fee_calculation_period_types.MONTH, )
 
     # The way how periodical fee is calculated
     class periodical_fee_calculation_methods(models.TextChoices):
