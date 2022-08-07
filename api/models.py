@@ -214,21 +214,6 @@ class RentContract(models.Model):
         choices=fixed_rent_calculation_period_types.choices,
         default=fixed_rent_calculation_period_types.MONTH, )
 
-    class fixed_rent_payment_period_types(models.TextChoices):
-        DAY = 'Day'
-        WEEK = 'Week'
-        MONTH = 'Month'
-        MONTHS3 = '3_months'
-        MONTHS6 = '6_months'
-        YEAR = 'Year'
-
-    fixed_rent_payment_period = models.CharField(
-        null=True,
-        blank=True,
-        max_length=20,
-        choices=fixed_rent_payment_period_types.choices,
-        default=fixed_rent_payment_period_types.MONTH, )
-
     class fixed_rent_calculation_methods(models.TextChoices):
         PER_SQM = 'Per_sqm'
         TOTAL = 'Total'
@@ -895,6 +880,8 @@ class RentContractSetup(models.Model):
         choices=fixed_rent_calculation_methods.choices,
         default=fixed_rent_calculation_methods.PER_SQM, )
 
+    # fixed_rent_step_payment = models
+
     fixed_rent_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
     fixed_rent_total_payment = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
 
@@ -1284,23 +1271,78 @@ class RentContractUtilityFeeSetup(models.Model):
         return self.utility_name
 
 
-class StepPeriodicPayment(models.Model):
+class FixedRentStep(models.Model):
     id = models.BigAutoField(primary_key=True)
+    rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
+    rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
+                                                              null=True, blank=True, default='')
     start_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
     expiration_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
-    payment_amount = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+    fixed_rent_amount = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
 
-    class payment_calculation_methods(models.TextChoices):
-        PER_SQM = 'Per_sqm'
-        TOTAL = 'Total'
+    class fixed_rent_calculation_period_types(models.TextChoices):
+        DAY = 'Day'
+        WEEK = 'Week'
+        MONTH = 'Month'
+        MONTHS3 = '3_months'
+        MONTHS6 = '6_months'
+        YEAR = 'Year'
 
-    payment_calculation_method = models.CharField(
+    fixed_rent_calculation_period = models.CharField(
         null=True,
         blank=True,
         max_length=20,
-        choices=payment_calculation_methods.choices,
-        default=payment_calculation_methods.PER_SQM, )
+        choices=fixed_rent_calculation_period_types.choices,
+        default=fixed_rent_calculation_period_types.MONTH, )
+
+    class fixed_rent_calculation_methods(models.TextChoices):
+        PER_SQM = 'Per_sqm'
+        TOTAL = 'Total'
+
+    fixed_rent_calculation_method = models.CharField(
+        null=True,
+        blank=True,
+        max_length=20,
+        choices=fixed_rent_calculation_methods.choices,
+        default=fixed_rent_calculation_methods.PER_SQM, )
 
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
+
+class PeriodicalFeeStep(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    periodical_fee_id = models.ForeignKey(RentContractPeriodicalFee, on_delete=models.CASCADE, null=True, default='')
+    start_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    expiration_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    periodical_fee_amount = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+
+    class periodical_fee_payment_period_types(models.TextChoices):
+        DAY = 'Day'
+        WEEK = 'Week'
+        MONTH = 'Month'
+        MONTHS3 = '3_months'
+        MONTHS6 = '6_months'
+        YEAR = 'Year'
+
+    periodical_fee_payment_period = models.CharField(
+        null=True,
+        blank=True,
+        max_length=20,
+        choices=periodical_fee_payment_period_types.choices,
+        default=periodical_fee_payment_period_types.MONTH, )
+
+    # The way how periodical fee is calculated
+    class periodical_fee_calculation_methods(models.TextChoices):
+        PER_SQM = 'Per_sqm'
+        TOTAL = 'Total'
+
+    periodical_fee_calculation_method = models.CharField(
+        null=True,
+        blank=True,
+        max_length=20,
+        choices=periodical_fee_calculation_methods.choices,
+        default=periodical_fee_calculation_methods.PER_SQM, )
+
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)

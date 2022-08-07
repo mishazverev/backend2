@@ -445,15 +445,35 @@ class RentContractUtilityFeeSetupSerializer(serializers.ModelSerializer):
         )
 
 
-class StepPeriodicPaymentSerializer(serializers.ModelSerializer):
+class FixedRentStepSerializer(serializers.ModelSerializer):
     class Meta:
-        model = StepPeriodicPayment
+        model = FixedRentStep
         fields = (
             'id',
+            'rent_contract_id',
+            'rent_contract_additional_agreement_id',
+
             'start_date',
             'expiration_date',
-            'payment_amount',
-            'payment_calculation_method',
+            'fixed_rent_amount',
+            'fixed_rent_calculation_period',
+            'fixed_rent_calculation_method',
+            'last_updated',
+            'user_updated',
+        )
+
+
+class PeriodicalFeeStepSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PeriodicalFeeStep
+        fields = (
+            'id',
+            'periodical_fee_id',
+            'start_date',
+            'expiration_date',
+            'periodical_fee_amount',
+            'periodical_fee_payment_period',
+            'periodical_fee_calculation_method',
             'last_updated',
             'user_updated',
         )

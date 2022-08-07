@@ -26,7 +26,8 @@ router.register('rent-contract-periodical-fee-setup', RentContractPeriodicalFeeS
 router.register('rent-contract-one-time-fee-setup', RentContractOneTimeFeeSetupViewSet)
 router.register('rent-contract-utility-fee-setup', RentContractUtilityFeeSetupViewSet)
 
-router.register('step-periodic-payment', StepPeriodicPaymentViewSet)
+router.register('fixed-rent-step', FixedRentStepViewSet)
+router.register('periodical-fee-step', PeriodicalFeeStepViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
