@@ -214,6 +214,21 @@ class RentContract(models.Model):
         choices=fixed_rent_calculation_period_types.choices,
         default=fixed_rent_calculation_period_types.MONTH, )
 
+    class fixed_rent_payment_period_types(models.TextChoices):
+        DAY = 'Day'
+        WEEK = 'Week'
+        MONTH = 'Month'
+        MONTHS3 = '3_months'
+        MONTHS6 = '6_months'
+        YEAR = 'Year'
+
+    fixed_rent_payment_period = models.CharField(
+        null=True,
+        blank=True,
+        max_length=20,
+        choices=fixed_rent_payment_period_types.choices,
+        default=fixed_rent_payment_period_types.MONTH, )
+
     class fixed_rent_calculation_methods(models.TextChoices):
         PER_SQM = 'Per_sqm'
         TOTAL = 'Total'
