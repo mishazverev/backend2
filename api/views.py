@@ -129,8 +129,12 @@ class BrandSearchFilter(ListAPIView):
 class FixedRentStepViewSet(viewsets.ModelViewSet):
     queryset = FixedRentStep.objects.all()
     serializer_class = FixedRentStepSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['rent_contract_id', 'rent_contract_additional_agreement_id']
 
 
 class PeriodicalFeeStepViewSet(viewsets.ModelViewSet):
     queryset = PeriodicalFeeStep.objects.all()
     serializer_class = PeriodicalFeeStepSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['rent_contract_id', 'rent_contract_additional_agreement_id']
