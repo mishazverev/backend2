@@ -463,6 +463,40 @@ class FixedRentStepSerializer(serializers.ModelSerializer):
         )
 
 
+class FixedRentIndexationStepSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FixedRentIndexationStep
+        fields = (
+            'id',
+            'rent_contract_id',
+            'rent_contract_additional_agreement_id',
+
+            'start_date',
+            'expiration_date',
+            'fixed_rent_indexation_amount',
+            'fixed_rent_indexation_calculation_period',
+            'last_updated',
+            'user_updated',
+        )
+
+
+class TurnoverFeeStepSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TurnoverFeeStep
+        fields = (
+            'id',
+            'rent_contract_id',
+            'rent_contract_additional_agreement_id',
+
+            'start_date',
+            'expiration_date',
+            'turnover_fee_amount',
+            'turnover_fee_calculation_period',
+            'last_updated',
+            'user_updated',
+        )
+
+
 class PeriodicalFeeStepSerializer(serializers.ModelSerializer):
     class Meta:
         model = PeriodicalFeeStep
@@ -474,6 +508,21 @@ class PeriodicalFeeStepSerializer(serializers.ModelSerializer):
             'periodical_fee_amount',
             'periodical_fee_calculation_period',
             'periodical_fee_calculation_method',
+            'last_updated',
+            'user_updated',
+        )
+
+
+class PeriodicalFeeIndexationStepSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PeriodicalFeeIndexationStep
+        fields = (
+            'id',
+            'periodical_fee_id',
+            'start_date',
+            'expiration_date',
+            'periodical_fee_indexation_amount',
+            'periodical_fee_indexation_calculation_period',
             'last_updated',
             'user_updated',
         )

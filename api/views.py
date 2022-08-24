@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
+
 from rest_framework.generics import ListAPIView
-from rest_framework import viewsets, filters
+from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -133,8 +134,29 @@ class FixedRentStepViewSet(viewsets.ModelViewSet):
     filterset_fields = ['rent_contract_id', 'rent_contract_additional_agreement_id']
 
 
+class FixedRentIndexationStepViewSet(viewsets.ModelViewSet):
+    queryset = FixedRentIndexationStep.objects.all()
+    serializer_class = FixedRentIndexationStepSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['rent_contract_id', 'rent_contract_additional_agreement_id']
+
+
+class TurnoverFeeStepViewSet(viewsets.ModelViewSet):
+    queryset = TurnoverFeeStep.objects.all()
+    serializer_class = TurnoverFeeStepSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['rent_contract_id', 'rent_contract_additional_agreement_id']
+
+
 class PeriodicalFeeStepViewSet(viewsets.ModelViewSet):
     queryset = PeriodicalFeeStep.objects.all()
     serializer_class = PeriodicalFeeStepSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['rent_contract_id', 'rent_contract_additional_agreement_id']
+    filterset_fields = ['periodical_fee_id']
+
+
+class PeriodicalFeeIndexationStepViewSet(viewsets.ModelViewSet):
+    queryset = PeriodicalFeeIndexationStep.objects.all()
+    serializer_class = PeriodicalFeeIndexationStepSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['periodical_fee_id']

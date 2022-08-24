@@ -1325,6 +1325,62 @@ class FixedRentStep(models.Model):
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
 
+class FixedRentIndexationStep(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
+    rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
+                                                              null=True, blank=True, default='')
+    start_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    expiration_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    fixed_rent_indexation_amount = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+
+    class fixed_rent_indexation_calculation_period_types(models.TextChoices):
+        DAY = 'Day'
+        WEEK = 'Week'
+        MONTH = 'Month'
+        MONTHS3 = '3_months'
+        MONTHS6 = '6_months'
+        YEAR = 'Year'
+
+    fixed_rent_indexation_calculation_period = models.CharField(
+        null=True,
+        blank=True,
+        max_length=20,
+        choices=fixed_rent_indexation_calculation_period_types.choices,
+        default=fixed_rent_indexation_calculation_period_types.MONTH, )
+
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+
+class TurnoverFeeStep(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    rent_contract_id = models.ForeignKey(RentContract, on_delete=models.CASCADE, null=True, default='')
+    rent_contract_additional_agreement_id = models.ForeignKey(AdditionalAgreement, on_delete=models.CASCADE,
+                                                              null=True, blank=True, default='')
+    start_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    expiration_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    turnover_fee_amount = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+
+    class turnover_fee_calculation_period_types(models.TextChoices):
+        DAY = 'Day'
+        WEEK = 'Week'
+        MONTH = 'Month'
+        MONTHS3 = '3_months'
+        MONTHS6 = '6_months'
+        YEAR = 'Year'
+
+    turnover_fee_calculation_period = models.CharField(
+        null=True,
+        blank=True,
+        max_length=20,
+        choices=turnover_fee_calculation_period_types.choices,
+        default=turnover_fee_calculation_period_types.MONTH, )
+
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+
 class PeriodicalFeeStep(models.Model):
     id = models.BigAutoField(primary_key=True)
     periodical_fee_id = models.ForeignKey(RentContractPeriodicalFee, on_delete=models.CASCADE, null=True, default='')
@@ -1358,6 +1414,33 @@ class PeriodicalFeeStep(models.Model):
         max_length=20,
         choices=periodical_fee_calculation_methods.choices,
         default=periodical_fee_calculation_methods.PER_SQM, )
+
+    last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
+    user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+
+class PeriodicalFeeIndexationStep(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    periodical_fee_id = models.ForeignKey(RentContractPeriodicalFee, on_delete=models.CASCADE, null=True, default='')
+
+    start_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    expiration_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
+    periodical_fee_indexation_amount = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+
+    class periodical_fee_indexation_calculation_period_types(models.TextChoices):
+        DAY = 'Day'
+        WEEK = 'Week'
+        MONTH = 'Month'
+        MONTHS3 = '3_months'
+        MONTHS6 = '6_months'
+        YEAR = 'Year'
+
+    periodical_fee_indexation_calculation_period = models.CharField(
+        null=True,
+        blank=True,
+        max_length=20,
+        choices=periodical_fee_indexation_calculation_period_types.choices,
+        default=periodical_fee_indexation_calculation_period_types.MONTH, )
 
     last_updated = models.DateTimeField(default=timezone.now, auto_now=False, auto_now_add=False)
     user_updated = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
