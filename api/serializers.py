@@ -202,39 +202,37 @@ class AdditionalAgreementSerializer(serializers.ModelSerializer):
             'additional_agreement_number',
             'additional_agreement_signing_date',
             'additional_agreement_expiration_date',
+            'rent_contract_expiration_date',
 
             'premise_id',
             'contracted_area',
             'tenant_contractor_id',
             'brand',
-
-            'act_of_transfer_date',
             'rent_start_date',
-            'premise_return_date',
             'stop_billing_date',
-
             'fixed_rent_calculation_period',
             'fixed_rent_payment_period',
-
+            'fixed_rent_calculation_method',
             'fixed_rent_per_sqm',
             'fixed_rent_total_payment',
+            'fixed_rent_prepayment_or_postpayment',
             'fixed_rent_advance_payment_day',
             'fixed_rent_post_payment_day',
             'fixed_rent_indexation_type',
             'fixed_rent_indexation_fixed',
-
+            'turnover_fee_is_applicable',
             'turnover_fee',
             'turnover_fee_period',
             'turnover_data_providing_day',
             'turnover_fee_payment_day',
-
+            'CA_utilities_compensation_is_applicable',
             'CA_utilities_compensation_type',
             'CA_utilities_compensation_fixed_indexation_type',
-
             'CA_utilities_compensation_fee_fixed',
             'CA_utilities_compensation_fee_fixed_indexation_type_fixed',
-            'CA_utilities_compensation_fee_payment_day',
-
+            'CA_utilities_compensation_fee_prepayment_or_postpayment',
+            'CA_utilities_compensation_fee_advance_payment_day',
+            'CA_utilities_compensation_fee_post_payment_day',
             'guarantee_deposit_required',
             'guarantee_deposit_coverage_number_of_periods',
             'guarantee_deposit_type',
@@ -242,14 +240,12 @@ class AdditionalAgreementSerializer(serializers.ModelSerializer):
             'guarantee_deposit_contract_providing_date',
             'guarantee_deposit_actual_providing_date',
             'guarantee_bank_guarantee_expiration_date',
-
             'insurance_required',
             'insurance_contract_providing_date',
             'insurance_actual_providing_date',
             'insurance_expiration_date',
-
             'last_updated',
-            'user_updated'
+            'user_updated',
         )
 
 

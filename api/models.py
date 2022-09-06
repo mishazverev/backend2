@@ -400,6 +400,7 @@ class AdditionalAgreement(models.Model):
     additional_agreement_number = models.CharField(max_length=50)
     additional_agreement_signing_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     additional_agreement_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    rent_contract_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
 
     premise_id = models.ManyToManyField(PremiseMain)
     contracted_area = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
@@ -407,11 +408,7 @@ class AdditionalAgreement(models.Model):
     brand = models.ForeignKey(Brand, on_delete=DO_NOTHING, null=True)
 
     # --- Dates ---
-
-    act_of_transfer_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
     rent_start_date = models.DateField(null=True, auto_now=False, auto_now_add=False, blank=True)
-
-    premise_return_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     stop_billing_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
 
     # Rental Payment
@@ -425,6 +422,7 @@ class AdditionalAgreement(models.Model):
 
     fixed_rent_calculation_period = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=fixed_rent_calculation_period_types.choices,
         default=fixed_rent_calculation_period_types.MONTH, )
@@ -439,12 +437,35 @@ class AdditionalAgreement(models.Model):
 
     fixed_rent_payment_period = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=fixed_rent_payment_period_types.choices,
         default=fixed_rent_payment_period_types.MONTH, )
 
+    class fixed_rent_calculation_methods(models.TextChoices):
+        PER_SQM = 'Per_sqm'
+        TOTAL = 'Total'
+
+    fixed_rent_calculation_method = models.CharField(
+        null=True,
+        blank=True,
+        max_length=20,
+        choices=fixed_rent_calculation_methods.choices,
+        default=fixed_rent_calculation_methods.PER_SQM, )
+
     fixed_rent_per_sqm = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
     fixed_rent_total_payment = models.DecimalField(null=True, max_digits=10, decimal_places=2, default=0)
+
+    class fixed_rent_prepayment_or_postpayment_types(models.TextChoices):
+        PREPAYMENT = 'Prepayment'
+        POSTPAYMENT = 'Postpayment'
+
+    fixed_rent_prepayment_or_postpayment = models.CharField(
+        null=True,
+        blank=True,
+        max_length=20,
+        choices=fixed_rent_prepayment_or_postpayment_types.choices,
+        default=fixed_rent_prepayment_or_postpayment_types.PREPAYMENT, )
 
     # In relevance with fixed_rent_payment_period - previous period day
     fixed_rent_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
@@ -462,6 +483,7 @@ class AdditionalAgreement(models.Model):
     fixed_rent_indexation_type = models.CharField(
         null=True,
         max_length=20,
+        blank=True,
         choices=fixed_rent_indexation_types.choices,
         default=fixed_rent_indexation_types.FIXED, )
 
@@ -469,25 +491,29 @@ class AdditionalAgreement(models.Model):
                                                       decimal_places=2, default=0)
     # Turnover fee
 
+    turnover_fee_is_applicable = models.BooleanField(default=True)
     turnover_fee = models.DecimalField(null=True, max_digits=4, decimal_places=2, default=0)
 
     class turnover_fee_periods(models.TextChoices):
-        MONTH1 = 'Month'
-        MONTH3 = '3_months'
-        MONTH6 = '6_months'
-        MONTH12 = 'Year'
+        DAY = 'Day'
+        WEEK = 'Week'
+        MONTH = 'Month'
+        MONTHS3 = '3_months'
+        MONTHS6 = '6_months'
+        YEAR = 'Year'
 
     turnover_fee_period = models.CharField(
         null=True,
         blank=True,
         max_length=20,
         choices=turnover_fee_periods.choices,
-        default=turnover_fee_periods.MONTH1, )
+        default=turnover_fee_periods.MONTH, )
 
     turnover_data_providing_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
     turnover_fee_payment_day = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0, default=0)
 
     # --- Utilities compensation - Common area (CA) ---
+    CA_utilities_compensation_is_applicable = models.BooleanField(default=True)
 
     class CA_utilities_compensation_types(models.TextChoices):
         FIXED = 'Fixed'
@@ -497,6 +523,7 @@ class AdditionalAgreement(models.Model):
 
     CA_utilities_compensation_type = models.CharField(
         null=True,
+        blank=True,
         max_length=50,
         choices=CA_utilities_compensation_types.choices,
         default=CA_utilities_compensation_types.PROPORTIONAL_GLA, )
@@ -509,6 +536,7 @@ class AdditionalAgreement(models.Model):
 
     CA_utilities_compensation_fixed_indexation_type = models.CharField(
         null=True,
+        blank=True,
         max_length=20,
         choices=CA_utilities_compensation_fixed_indexation_types.choices,
         default=CA_utilities_compensation_fixed_indexation_types.FIXED, )
@@ -519,8 +547,23 @@ class AdditionalAgreement(models.Model):
                                                                                     decimal_places=2,
                                                                                     default=0)
 
-    CA_utilities_compensation_fee_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
-                                                                    decimal_places=0, default=0)
+    class CA_utilities_compensation_fee_prepayment_or_postpayment_types(models.TextChoices):
+        PREPAYMENT = 'Prepayment'
+        POSTPAYMENT = 'Postpayment'
+
+    CA_utilities_compensation_fee_prepayment_or_postpayment = models.CharField(
+        null=True,
+        blank=True,
+        max_length=20,
+        choices=CA_utilities_compensation_fee_prepayment_or_postpayment_types.choices,
+        default=CA_utilities_compensation_fee_prepayment_or_postpayment_types.PREPAYMENT, )
+
+    CA_utilities_compensation_fee_advance_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
+                                                                            decimal_places=0,
+                                                                            default=0)
+    CA_utilities_compensation_fee_post_payment_day = models.DecimalField(null=True, blank=True, max_digits=2,
+                                                                         decimal_places=0,
+                                                                         default=0)
 
     # --- Guarantee deposit
     guarantee_deposit_required = models.BooleanField(default=True)
@@ -528,8 +571,8 @@ class AdditionalAgreement(models.Model):
 
     class guarantee_deposit_types(models.TextChoices):
         CASH = 'Cash'
-        BANK_GUARANTEE = 'Bank guarantee'
-        CORPORATE_GUARANTEE = 'Corporate guarantee'
+        BANK_GUARANTEE = 'Bank_guarantee'
+        CORPORATE_GUARANTEE = 'Corporate_guarantee'
 
     guarantee_deposit_type = models.CharField(
         null=True,
