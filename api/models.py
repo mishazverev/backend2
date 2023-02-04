@@ -403,7 +403,7 @@ class AdditionalAgreement(models.Model):
     additional_agreement_number = models.CharField(max_length=50)
     additional_agreement_signing_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     additional_agreement_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
-    rent_contract_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    rent_contract_expiration_date = models.DateField(auto_now=False, auto_now_add=False, blank=True)
 
     premise_id = models.ManyToManyField(PremiseMain)
     contracted_area = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
