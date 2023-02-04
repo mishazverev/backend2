@@ -33,6 +33,8 @@ class BuildingSerializer(serializers.ModelSerializer):
             'address_city',
             'address_street_number',
             'number_of_floors',
+            'gba',
+            'gla',
             'description',
             'last_updated',
             'user_updated'
