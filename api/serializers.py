@@ -38,7 +38,6 @@ class BuildingSerializer(serializers.ModelSerializer):
             'description',
             'last_updated',
             'user_updated'
-
         )
 
 

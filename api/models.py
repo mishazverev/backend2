@@ -15,8 +15,8 @@ class Building(models.Model):
     address_street_number = models.CharField(blank=True, null=True, max_length=50)
     number_of_floors = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
                                            default=0)
-    gba = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
-    gla = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    gba = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2, default=0)
+    gla = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2, default=0)
 
     description = models.TextField(blank=True, null=True, max_length=500)
 
