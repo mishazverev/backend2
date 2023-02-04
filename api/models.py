@@ -15,8 +15,8 @@ class Building(models.Model):
     address_street_number = models.CharField(blank=True, null=True, max_length=50)
     number_of_floors = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=0,
                                            default=0)
-    #gba = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2, default=0)
-    #gla = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2, default=0)
+    gba = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2, default=0)
+    gla = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2, default=0)
 
     description = models.TextField(blank=True, null=True, max_length=500)
 
@@ -403,7 +403,7 @@ class AdditionalAgreement(models.Model):
     additional_agreement_number = models.CharField(max_length=50)
     additional_agreement_signing_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     additional_agreement_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
-    rent_contract_expiration_date = models.DateField(auto_now=False, auto_now_add=False, blank=True)
+    rent_contract_expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
 
     premise_id = models.ManyToManyField(PremiseMain)
     contracted_area = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
